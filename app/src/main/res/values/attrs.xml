@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RichEditText">
+        <attr name="bulletColor" format="color|reference"/>
+        <attr name="bulletRadius" format="dimension|reference"/>
+        <attr name="bulletGapWidth" format="reference|dimension"/>
+        <attr name="underLine" format="boolean|reference"/>
+        <attr name="linkColor" format="color|reference"/>
+        <attr name="quoteColor" format="reference|color"/>
+        <attr name="quoteStripeWidth" format="reference|dimension"/>
+        <attr name="quoteGapWith" format="reference|dimension"/>
+    </declare-styleable>
+
+</resources>

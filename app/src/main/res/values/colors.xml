@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#cc3a3a</color>
+    <color name="material_red_500">#C62F2F</color>
+    <color name="material_gray">#545657</color>
+    <color name="material_white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="bg_one">#26ae90</color>
+    <color name="white">#ffffff</color>
+    <color name="theme_grey_white">#F2F2F2</color>
+    <color name="tishi_yellow">#FFCC00</color>
+
+    <color name="text_color_level_1">#000000</color>
+    <color name="text_color_level_2">#383838</color>
+    <color name="text_color_level_1_2">#cc424242</color>
+    <color name="text_color_level_3">#707070</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="btn_login_press">#646464</color>
+    <color name="btn_long_normal">#d3d3d3</color>
+    <color name="press">#25fa55</color>
+    <color name="purple">#EE82EE</color>
+    <color name="yellow">#ccff33</color>
+    <color name="blue">#3333ff</color>
+    <color name="red">#ff0000</color>
+
+
+
+
+
+</resources>

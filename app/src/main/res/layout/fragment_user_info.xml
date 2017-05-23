@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2016 XuJiaji
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layerType="hardware">
+
+    <RelativeLayout
+        android:id="@+id/root_dl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:layerType="hardware">
+
+        <RelativeLayout
+            android:id="@+id/headLayout"
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:background="@color/white">
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/headLayout"
+            android:paddingTop="5dp"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/fab_container"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_below="@+id/status"
+        android:fitsSystemWindows="true"
+        android:layerType="hardware">
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_chevron_left_24dp" />
+
+        <io.xujiaji.hnbc.widget.TextViewBoldNew
+            android:id="@+id/tvUsername"
+            style="@style/userInfoTextStyle"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="\@account"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add_24dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+
+    <include layout="@layout/include_status" />
+</RelativeLayout>

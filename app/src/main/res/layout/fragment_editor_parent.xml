@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/shadow_edit">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AppBarLayout"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            >
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_edit"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/action_other_operate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_red_500"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                app:el_duration="400"
+                app:el_expanded="false">
+
+                <com.aoliao.notebook.widget.TabIconView
+                    android:id="@+id/tabIconView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_expandable="true" />
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_editModify_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:src="@mipmap/ic_floating_modify_1"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
+                app:pressedTranslationZ="12dp"
+                app:elevation="6dp"
+                app:rippleColor="@android:color/background_dark"/>
+
+        </FrameLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

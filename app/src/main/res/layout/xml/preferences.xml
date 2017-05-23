@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout="@layout/preferences_item"
+    android:title="@string/title_activity_setting">
+
+
+
+    <PreferenceCategory
+        android:layout="@layout/preferences_category_widget"
+        android:title="网络">
+
+        <CheckBoxPreference
+            android:layout="@layout/preferences_item"
+            android:title="仅Wi-Fi下联网"
+            android:key="@string/net_mode"
+            android:summaryOn="2G/3G/4G网络下不消耗流量"
+            android:summaryOff="非Wi-Fi下浏览图片"
+            android:widgetLayout="@layout/switch_layout"
+            android:defaultValue="false"/>
+        <CheckBoxPreference
+            android:layout="@layout/preferences_item"
+            android:title="Wi-Fi下自动下载更新包"
+            android:key="@string/update_wifi"
+            android:widgetLayout="@layout/switch_layout"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout="@layout/preferences_category_widget"
+        android:title="账号和隐私">
+        <Preference
+            android:layout="@layout/preferences_item"
+            android:title="账号和绑定设置"
+            android:key="@string/account_binding"
+            android:defaultValue="false"
+            />
+        <Preference
+            android:layout="@layout/preferences_item"
+            android:title="消息和隐私设置"
+            android:key="@string/message_personal"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout="@layout/preferences_category_widget"
+        android:title="关于">
+        <Preference
+            android:layout="@layout/preferences_item"
+            android:title="帮助与反馈"
+            android:key="@string/help_feedback"
+            android:defaultValue="false"/>
+        <Preference
+            android:layout="@layout/preferences_item"
+            android:title="关于读书笔记"
+            android:key="@string/guanyudushubiji"
+            android:defaultValue="false"/>
+        <Preference
+            android:layout="@layout/preferences_item"
+            android:title="手动检查更新"
+            android:key="@string/update_operate"
+            android:defaultValue="false"/>
+        <Preference
+            android:layout="@layout/preferences_item"
+            android:title="当前版本"
+            android:key="@string/version"
+            android:summary="V 1.0"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
