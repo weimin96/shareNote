@@ -1,9 +1,6 @@
 package com.aoliao.notebook.ui;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,6 +11,9 @@ import com.aoliao.notebook.utils.LeakUtil;
 import com.aoliao.notebook.utils.NetworkUtils;
 import com.aoliao.notebook.xmvp.XBaseActivity;
 import com.aoliao.notebook.xmvp.XBasePresenter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -26,31 +26,14 @@ public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivi
     //网络类型
     private int mNetType;
 
+    //是否更新过用户信息
+    private boolean updatedUser = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initStatus();
         evevt = this;
         isNetConnect();
-    }
-
-    private void initStatus() {
-//        View status = ButterKnife.findById(this, R.id.status);
-//        if (status != null) {
-//            ActivityUtils.initSatus(status);
-//        }
-    }
-
-    /**
-     * 添加Fragment
-     */
-    protected void addFragment(android.support.v4.app.Fragment fragment, @IdRes int idRes) {
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        String tag = fragment.getClass().getSimpleName();
-        android.support.v4.app.Fragment f = manager.findFragmentByTag(tag);
-        if (f == null) {
-            manager.beginTransaction().add(idRes, fragment, tag).commit();
-        }
     }
 
     @Override
@@ -65,7 +48,7 @@ public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivi
         }
         toolbar.setTitle(R.string.app_name);//必要
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_action_back);
+        toolbar.setNavigationIcon(R.mipmap.ic_action_mode_back);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -111,4 +94,39 @@ public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivi
         }
         return false;
     }
+    public void setUpdatedUser(boolean updatedUser) {
+        this.updatedUser = updatedUser;
+    }
+
+    //保存一些数据
+    private static Map<String, Object> dataSave = new HashMap<>(2);
+
+    /**
+     * 获取数据
+     * @param key
+     * @param <D>
+     * @return
+     */
+    public static <D> D getData(String key) {
+        Object obj = dataSave.get(key);
+        if (obj == null) {
+            return null;
+        } else {
+            return (D) obj;
+        }
+    }
+    /**
+     * 保存数据
+     * @param key
+     * @param obj
+     */
+    public static void saveData(String key, Object obj) {
+        dataSave.put(key, obj);
+    }
+
+    public static void clearData() {
+        dataSave.clear();
+    }
+
+
 }

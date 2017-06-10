@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright 2016 XuJiaji
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~       http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layerType="hardware">
@@ -25,6 +10,9 @@
         android:id="@+id/root_dl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/white"
         android:fitsSystemWindows="true"
         android:layerType="hardware">
@@ -32,58 +20,212 @@
         <RelativeLayout
             android:id="@+id/headLayout"
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="230dp"
             android:background="@color/white">
 
+            <ImageView
+                android:id="@+id/imgUserInfoBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/black"
+                android:scaleType="centerCrop"/>
 
+            <ImageView
+                android:id="@+id/imgHead"
+                android:layout_width="@dimen/user_info_head_width"
+                android:layout_height="@dimen/user_info_head_width"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/head"/>
+
+
+            <TextView
+                android:id="@+id/tvNickname"
+                style="@style/userInfoTextStyle"
+                android:layout_above="@+id/tvSign"
+                android:layout_alignLeft="@+id/tvSign"
+                android:layout_alignStart="@+id/tvSign"
+                android:maxLines="1"
+                android:text="昵称"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_level2"/>
+
+            <TextView
+                android:id="@+id/tvSign"
+                style="@style/userInfoTextStyle"
+                android:layout_alignBottom="@+id/imgHead"
+                android:layout_marginLeft="17dp"
+                android:layout_marginStart="17dp"
+                android:layout_toEndOf="@+id/imgHead"
+                android:layout_toRightOf="@+id/imgHead"
+                android:maxLines="3"
+                android:maxWidth="260dp"
+                android:text="签名"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_level5"/>
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/headLayout"
-            android:paddingTop="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btnFans"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvFans"
+                        style="@style/userInfoUINumStyle"
+                        android:text="0"/>
+
+                    <TextView
+                        style="@style/userInfoUINumNameStyle"
+                        android:text="@string/fans"/>
+                </LinearLayout>
+
+                <View style="@style/userInfoUIVerticalLineStyle"/>
+
+                <LinearLayout
+                    android:id="@+id/btnFocus"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvFocus"
+                        style="@style/userInfoUINumStyle"
+                        android:text="0"/>
+
+                    <TextView
+                        style="@style/userInfoUINumNameStyle"
+                        android:text="@string/attention"/>
+                </LinearLayout>
+
+                <View style="@style/userInfoUIVerticalLineStyle"/>
+
+                <LinearLayout
+                    android:id="@+id/btnCollect"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCollect"
+                        style="@style/userInfoUINumStyle"
+                        android:text="0"/>
+
+                    <TextView
+                        style="@style/userInfoUINumNameStyle"
+                        android:text="@string/collect"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#767b7b"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/publicDynamic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginTop="14dp"
+                        android:clickable="true"
+                        android:text="@string/public_dynamic"
+                        android:textColor="#222222"
+                        android:textSize="@dimen/text_size_level3"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#767b7b"/>
+
+                    <TextView
+                        android:id="@+id/myDynamic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:clickable="true"
+                        android:text="@string/my_dynamic"
+                        android:textColor="#222222"
+                        android:textSize="@dimen/text_size_level3"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#767b7b"/>
+
+                    <TextView
+                        android:id="@+id/userMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clickable="true"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:text="@string/user_message"
+                        android:textColor="#222222"
+                        android:textSize="@dimen/text_size_level3"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#767b7b"/>
+
+                    <TextView
+                        android:id="@+id/exit_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clickable="true"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:text="@string/exit_login"
+                        android:textColor="#222222"
+                        android:textSize="@dimen/text_size_level3"/>
+                </LinearLayout>
+
+            </ScrollView>
 
         </LinearLayout>
 
     </RelativeLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/fab_container"
-        android:layout_width="wrap_content"
-        android:layout_height="?actionBarSize"
-        android:layout_below="@+id/status"
-        android:fitsSystemWindows="true"
-        android:layerType="hardware">
-
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_chevron_left_24dp" />
-
-        <io.xujiaji.hnbc.widget.TextViewBoldNew
-            android:id="@+id/tvUsername"
-            style="@style/userInfoTextStyle"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/small_margin"
-            android:text="\@account"
-            android:textColor="@color/white" />
-
-        <ImageView
-            android:id="@+id/more"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
-            android:layout_alignParentEnd="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_add_24dp"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
-
-
-    <include layout="@layout/include_status" />
 </RelativeLayout>

@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <android.support.v4.view.ViewPager
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
@@ -14,22 +15,16 @@
         android:layout_height="50dp"
         >
 
+        <!-- 这个@android:id/tabs虽然在代码中没有用findViewById获取，但是一定要写，FragmentTabHost中会去调用，
+                             另外，如果发现这个显示不正常(只有背景色，没有文字)，应该是你android-support-v4.jar包太老了，
+             google每次更新sdk都会修改android-support-v4.jar包，下个最新的就可以了，更换jar包后还是有问题就clean一下。 -->
 
+        <FrameLayout
+            android:id="@+id/tabContent"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
 
-            <!-- 这个@android:id/tabs虽然在代码中没有用findViewById获取，但是一定要写，FragmentTabHost中会去调用，
-                                 另外，如果发现这个显示不正常(只有背景色，没有文字)，应该是你android-support-v4.jar包太老了，
-                 google每次更新sdk都会修改android-support-v4.jar包，下个最新的就可以了，更换jar包后还是有问题就clean一下。 -->
-
-
-
-
-            <FrameLayout
-                android:id="@+id/tabContent"
-                android:layout_width="0dp"
-                android:layout_height="0dp" >
-
-            </FrameLayout>
-
+        </FrameLayout>
 
     </android.support.v4.app.FragmentTabHost>
 

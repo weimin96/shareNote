@@ -5,17 +5,11 @@
             android:id="@+id/notebookMenuId"
             android:title="@string/notebook"/>
         <item
-            android:id="@+id/tarMenuId"
-            android:title="@string/tar"/>
-        <item
             android:id="@+id/recycleMenuId"
             android:title="@string/recycle"/>
     </group>
     <item android:title="@string/setting">
         <menu>
-            <item
-                android:id="@+id/nightMenuId"
-                android:title="@string/night"/>
             <item
                 android:id="@+id/settingMenuId"
                 android:title="@string/setting"/>

@@ -22,10 +22,6 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 
 
-/**
- * 输入监听
- * Created by 沈钦赐 on 16/6/24.
- */
 public class PerformInputAfter {
 
     private final Editable editable;

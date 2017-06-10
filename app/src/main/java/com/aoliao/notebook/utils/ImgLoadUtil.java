@@ -20,7 +20,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.aoliao.notebook.R;
-import com.aoliao.notebook.model.entity.Write;
+import com.aoliao.notebook.utils.entity.Write;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 

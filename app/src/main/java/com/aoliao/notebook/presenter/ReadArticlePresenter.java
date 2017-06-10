@@ -1,43 +1,28 @@
-/*
- * Copyright 2016 XuJiaji
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.aoliao.notebook.presenter;
+
 
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.contract.ReadActicleContract;
 import com.aoliao.notebook.fragment.BaseMainFragment;
-import com.aoliao.notebook.helper.AppController;
-import com.aoliao.notebook.helper.Config;
-import com.aoliao.notebook.model.NetRequest;
-import com.aoliao.notebook.model.entity.Comment;
-import com.aoliao.notebook.model.entity.Post;
-import com.aoliao.notebook.model.entity.Reply;
-import com.aoliao.notebook.model.entity.User;
-import com.aoliao.notebook.utils.LogUtil;
+import com.aoliao.notebook.AppController;
+import com.aoliao.notebook.config.Config;
+import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.utils.entity.Comment;
+import com.aoliao.notebook.utils.entity.Post;
+import com.aoliao.notebook.utils.entity.Reply;
+import com.aoliao.notebook.utils.entity.User;
+import com.aoliao.notebook.ui.BaseActivity;
 import com.aoliao.notebook.xmvp.XBasePresenter;
 
 import java.util.List;
 
 
-/**
- * Created by jiana on 16-11-14.
- */
 
 public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.View> implements ReadActicleContract.Presenter {
     private Post post;
+    private Post post_RC;
+
 
     public ReadArticlePresenter(ReadActicleContract.View view) {
         super(view);
@@ -47,6 +32,7 @@ public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.Vie
     public void end() {
         super.end();
         post = null;
+        post_RC=null;
     }
 
     @Override
@@ -60,8 +46,8 @@ public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.Vie
 
             @Override
             public void error(String err) {
-                LogUtil.e3(err);
             }
+
         });
     }
 
@@ -76,18 +62,22 @@ public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.Vie
 
             @Override
             public void error(String err) {
-
             }
         });
     }
 
     @Override
     public void requestPostData() {
-        post = BaseMainFragment.getData(Config.data.KEY_POST);
+        if (BaseMainFragment.getData(Config.data.KEY_POST)!=null){
+            post=BaseMainFragment.getData(Config.data.KEY_POST);
+        }else if (BaseActivity.getData(Config.data.KEY_POST)!=null){
+            post = BaseActivity.getData(Config.data.KEY_POST);
+        }
         if (post != null) {
             view.showArticle(post);
             requestCommentsData(post.getObjectId());
             BaseMainFragment.clearData();
+            BaseActivity.clearData();
         }
     }
 

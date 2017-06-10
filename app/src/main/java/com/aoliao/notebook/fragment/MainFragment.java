@@ -1,20 +1,14 @@
 package com.aoliao.notebook.fragment;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,14 +17,15 @@ import android.widget.RelativeLayout;
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.adapter.MainBottomRecyclerAdapter;
 import com.aoliao.notebook.contract.MainContract;
-import com.aoliao.notebook.model.OnItemClickListener;
-import com.aoliao.notebook.model.entity.Post;
+import com.aoliao.notebook.config.Config;
+import com.aoliao.notebook.utils.entity.Post;
 import com.aoliao.notebook.presenter.MainFragPresenter;
+import com.aoliao.notebook.ui.BaseActivity;
 import com.aoliao.notebook.ui.EditorActivity;
-import com.aoliao.notebook.ui.MainActivity;
+import com.aoliao.notebook.ui.ReadArticleActivity;
+import com.aoliao.notebook.ui.UserInfoActivity;
 import com.aoliao.notebook.utils.GlideImageLoader;
-import com.aoliao.notebook.utils.LogUtil;
-import com.aoliao.notebook.utils.MaterialRippleHelper;
+import com.aoliao.notebook.utils.helper.MaterialRippleHelper;
 import com.aoliao.notebook.utils.ScreenUtils;
 import com.aoliao.notebook.utils.ToastUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -38,12 +33,13 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerClickListener;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by 你的奥利奥 on 2017/5/13.
@@ -57,8 +53,8 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
     ImageView imgScrollInfo;
     @BindView(R.id.swipeLayout)
     SwipeRefreshLayout swipeLayout;
-//    @BindView(R.id.status)
-//    View status;
+    @BindView(R.id.status)
+    RelativeLayout status;
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.fab)
@@ -67,6 +63,9 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
     View appbar;
     @BindView(R.id.dl3)
     ViewGroup dl3;
+    @BindView(R.id.root_dl)
+    ViewGroup rootdl;
+
     private MainFragHandler handler;
     private Runnable runnableTop, runnableBottom;
     private boolean scrollRunning;//底部view是否正在滚动
@@ -85,27 +84,38 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
      */
     public static final int BOTTOM_VIEW_STATUS_BOTTOM = 0;
 
-    public static MainFragment newInstance() {
-        return new MainFragment();
-    }
-
-
     @Override
     protected void onInit() {
         super.onInit();
+
         handler = new MainFragHandler(this);
         MaterialRippleHelper.ripple(imgScrollInfo);
-//        initStatusHeight();
         initBanner();
+        initStatusHeight();
         swipeLayout.setRefreshing(true);
         fab.setImageResource(R.mipmap.ic_plus_skittle);
+
     }
+
 
     private void initBanner() {
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
+    }
+
+    @OnClick({R.id.imgScrollInfo})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgScrollInfo:
+                if (bottomViewNowStatus == BOTTOM_VIEW_STATUS_TOP) {
+                    contentLayoutToDown();
+                } else if (bottomViewNowStatus == BOTTOM_VIEW_STATUS_BOTTOM) {
+                    contentLayoutToTop();
+                }
+                break;
+        }
     }
 
     @Override
@@ -119,27 +129,24 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
                 bd.putInt("class", 0x2);
                 intent.putExtras(bd);
                 startActivity(intent);
-//                getFragmentManager().beginTransaction().add(R.id.container, new EditorActivity()).commit();
             }
         });
 
         mainBottomRecycler.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void SimpleOnItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                LogUtil.e2("position = " + i);
-                LogUtil.e3(view.toString());
                 switch (view.getId()) {
                     case R.id.tvUserName:
                         //跳转到用户信息查看
-//                        goLookUser(baseQuickAdapter, i);
+                        goLookUser(baseQuickAdapter, i);
                         break;
                     case R.id.imgHead:
                         //跳转到用户信息查看
-//                        goLookUser(baseQuickAdapter, i);
+                        goLookUser(baseQuickAdapter, i);
                         break;
                     case R.id.layoutBaseArticle:
-//                        saveData(C.data.KEY_POST, baseQuickAdapter.getData().get(i));
-//                        MainActivity.startFragment(C.fragment.READ_ARTICLE);
+                        BaseActivity.saveData(Config.data.KEY_POST, baseQuickAdapter.getData().get(i));
+                        startActivity(new Intent(getActivity(), ReadArticleActivity.class));
                         break;
                     case R.id.btnLike:
                         Post post = (Post) baseQuickAdapter.getData().get(i);
@@ -151,7 +158,13 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
                         break;
                 }
             }
-        });
+        private void goLookUser(BaseQuickAdapter baseQuickAdapter, int i){
+            Post post = (Post) baseQuickAdapter.getData().get(i);
+            BaseActivity.saveData(Config.data.KEY_USER, post.getAuthor());
+            UserInfoActivity.SelfSwitch=false;
+            startActivity(new Intent(getActivity(), UserInfoActivity.class));
+        }
+});
 
         mainBottomRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int dyDiff = 0;
@@ -159,7 +172,6 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-//                LogUtil.e1("newState = " + newState + "; dyDiff = " + dyDiff);
                 LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (dyDiff <= 0 && newState == 0 && manager.findFirstVisibleItemPosition() == 0) {
                     contentLayoutToDown();
@@ -167,14 +179,12 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
 
                 if (newState == 0) {
                     dyDiff = 0;
-//                    LogUtil.e1("set newState == 0");
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-//                LogUtil.e1("dy = " + dy);
                 dyDiff += dy;
                 if (dy > 0) {
                     contentLayoutToTop();
@@ -182,18 +192,19 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
             }
         });
 
-        banner.setOnBannerClickListener(new OnBannerClickListener() {
+        banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                presenter.requestOpenBannerLink(getActivity(), position - 1);
+                presenter.requestOpenBannerLink(getActivity(), position );
             }
         });
-    }
 
+
+    }
 
     @Override
     protected BaseQuickAdapter<Post, BaseViewHolder> getAdapter() {
-        return new MainBottomRecyclerAdapter();
+        return new MainBottomRecyclerAdapter(R.layout.item_main_card);
     }
 
     @Override
@@ -216,20 +227,21 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
         }
     }
 
-//    private void initStatusHeight() {
-//        int statusHeight = ScreenUtils.getStatusHeight(getActivity());
-//        ViewGroup.LayoutParams statusParams = status.getLayoutParams();
-//        statusParams.height = statusHeight;
-//        status.setLayoutParams(statusParams);
-//
-//        ViewGroup.LayoutParams params = appbar.getLayoutParams();
-//        params.height = params.height + statusHeight;
-//        appbar.setLayoutParams(params);
-//
-//        RelativeLayout.LayoutParams dl2Params = (RelativeLayout.LayoutParams) dl2.getLayoutParams();
-//        dl2Params.topMargin = dl2Params.topMargin + statusHeight;
-//        dl2.setLayoutParams(dl2Params);
-//    }
+
+    private void initStatusHeight() {
+        int statusHeight = ScreenUtils.getStatusHeight(getActivity());
+        ViewGroup.LayoutParams statusParams = status.getLayoutParams();
+        statusParams.height = statusHeight;
+        status.setLayoutParams(statusParams);
+
+        ViewGroup.LayoutParams params = appbar.getLayoutParams();
+        params.height = params.height + statusHeight;
+        appbar.setLayoutParams(params);
+
+        RelativeLayout.LayoutParams dl2Params = (RelativeLayout.LayoutParams) rootdl.getLayoutParams();
+        dl2Params.topMargin = dl2Params.topMargin + statusHeight;
+        rootdl.setLayoutParams(dl2Params);
+    }
 
     /**
      * 布局到顶部
@@ -332,13 +344,13 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
 
     @Override
     public void pullBannerDataFail(String err) {
-        ToastUtil.getInstance().showShortT(err);
+//        ToastUtil.getInstance().showShortT(err);有问题
     }
 
 
     @Override
-    public void likePostSuccess() {
-        ToastUtil.getInstance().showShortT(R.string.like_cuccess);
+    public void likePostSuccess(String s) {
+        ToastUtil.getInstance().showShortT(s);
     }
 
     @Override
@@ -347,8 +359,8 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
     }
 
     @Override
-    public void followUserSuccess() {
-        ToastUtil.getInstance().showShortT(R.string.follow_success);
+    public void followUserSuccess(String s) {
+        ToastUtil.getInstance().showShortT(s);
     }
 
     @Override
@@ -363,10 +375,7 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
 
 
     public static final class MainFragHandler extends Handler {
-        /**
-         * 打开菜单
-         */
-        public static final int OPEN_MENU = 0X22;
+
         private WeakReference<MainFragment> wr;
 
         public MainFragHandler(MainFragment mf) {

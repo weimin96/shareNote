@@ -1,45 +1,28 @@
-/*
- * Copyright 2016 XuJiaji
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.aoliao.notebook.presenter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.ImageView;
 
+import com.aoliao.notebook.config.Config;
 import com.aoliao.notebook.contract.MainContract;
 import com.aoliao.notebook.fragment.MainFragment;
-import com.aoliao.notebook.model.NetRequest;
-import com.aoliao.notebook.model.data.DataFiller;
-import com.aoliao.notebook.model.entity.BannerData;
-import com.aoliao.notebook.model.entity.MainTag;
-import com.aoliao.notebook.model.entity.Post;
-import com.aoliao.notebook.model.entity.User;
+import com.aoliao.notebook.ui.BaseActivity;
+import com.aoliao.notebook.ui.ReadArticleActivity;
+import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.utils.entity.BannerData;
+import com.aoliao.notebook.utils.entity.MainTag;
+import com.aoliao.notebook.utils.entity.Post;
+import com.aoliao.notebook.utils.entity.User;
 import com.aoliao.notebook.xmvp.XBasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-
-
-/**
- * Created by jiana on 16-7-22.
- */
 public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView> implements MainContract.MainFragPersenter {
     private List<BannerData> bannerDataList = null;
 
@@ -78,6 +61,9 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
                     titles.add(bd.getTitle());
                     images.add(bd.getPicUrl());
                 }
+                if (view==null){
+                    return;
+                }
                 view.pullBannerDataSuccess(titles, images);
             }
 
@@ -89,10 +75,21 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
     }
 
     @Override
-    public void requestOpenBannerLink(Context context, int position) {
-        Uri uri = Uri.parse(bannerDataList.get(position).getLinkTo());
-        Intent it = new Intent(Intent.ACTION_VIEW, uri);
-        context.startActivity(it);
+    public void requestOpenBannerLink(final Context context, int position) {
+
+        NetRequest.Instance().queryPost(bannerDataList.get(position).getLinkTo(),
+                new NetRequest.RequestListener<Post>() {
+            @Override
+            public void success(Post post) {
+                BaseActivity.saveData(Config.data.KEY_POST, post);
+                context.startActivity(new Intent(context, ReadArticleActivity.class));
+            }
+
+            @Override
+            public void error(String err) {
+
+            }
+        });
     }
 
     @Override
@@ -106,6 +103,9 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
         NetRequest.Instance().pullPostList(0, MainFragment.PAGE_SIZE, new NetRequest.RequestListener<List<Post>>() {
             @Override
             public void success(List<Post> posts) {
+                if (view==null){
+                    return;
+                }
                 view.updateListSuccess(posts);
             }
 
@@ -124,6 +124,9 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
                 if (posts == null || posts.size() == 0) {
                    // view.loadListDateOver();
                 } else {
+                    if (view==null){
+                        return;
+                    }
                     view.loadListDataSuccess(posts);
                 }
             }
@@ -140,7 +143,7 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
         NetRequest.Instance().likeComment(post, new NetRequest.RequestListener<String>() {
             @Override
             public void success(String s) {
-                view.likePostSuccess();
+                view.likePostSuccess(s);
             }
 
             @Override
@@ -155,7 +158,7 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
         NetRequest.Instance().followUser(user, new NetRequest.RequestListener<String>() {
             @Override
             public void success(String s) {
-                view.followUserSuccess();
+                view.followUserSuccess(s);
             }
 
             @Override

@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 /**
  * 检测类
  * The type Check.
- * Created by 沈钦赐（部分方法收集网上）
  */
 public class Check {
     //邮件验证

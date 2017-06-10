@@ -1,26 +1,7 @@
-/*
- * Copyright 2016 XuJiaji
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.aoliao.notebook.utils;
 
 import static android.text.TextUtils.isEmpty;
-
-/**
- * Created by jiana on 16-11-5.
- */
 
 public class LoginCheck {
 
@@ -93,7 +74,7 @@ public class LoginCheck {
      */
     public static String checkEmail(String email) {
         if (isEmpty(email)) {
-            return "[Err]邮箱不能为空！";
+            return "邮箱不能为空！";
         }
         if (email.matches("[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?")) {
             return null;
@@ -110,12 +91,12 @@ public class LoginCheck {
      */
     public static String checkPhone(String phone) {
         if (isEmpty(phone)) {
-            return "[Err]手机号不能为空！";
+            return "手机号不能为空！";
         }
         if (phone.matches("^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$")) {
             return null;
         } else {
-            return "[Err]请检测您的手机号！";
+            return "请检测您的手机号！";
         }
     }
 
@@ -127,15 +108,15 @@ public class LoginCheck {
      */
     public static String checkAccount(String name) {
         if (isEmpty(name)) {
-            return "[Err]账户不能为空！";
+            return "账户不能为空！";
         }
         if (name.length() > 20) {
-            return "[Err]账号不能长于20位";
+            return "账号不能长于20位";
         }
         if (name.matches("[a-zA-Z0-9_.,!]+")) {
             return null;
         } else {
-            return "[☞]账号用她们来组合:a-z A-Z 0-9 _ . , !";
+            return "账号用她们来组合:a-z A-Z 0-9 _ . , !";
         }
     }
 
@@ -147,18 +128,18 @@ public class LoginCheck {
      */
     public static String checkPassword(String password) {
         if (isEmpty(password)) {
-            return "[Err]密码不能为空！";
+            return "密码不能为空！";
         }
         if (password.length() < 6) {
-            return "[Err]密码要超过六位！";
+            return "密码要超过六位！";
         }
         if (password.length() > 20) {
-            return "[Err]密码不能长于20位";
+            return "密码不能长于20位";
         }
         if (password.matches("[a-zA-Z0-9_.,!]+")) {
             return null;
         } else {
-            return "[☞]密码用她们来组合:a-z A-Z 0-9 _ . , !";
+            return "密码用她们来组合:a-z A-Z 0-9 _ . , !";
         }
     }
 }

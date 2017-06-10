@@ -17,14 +17,22 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
     <application
-        android:name=".helper.AppController"
+        android:name=".AppController"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_share"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+
+        <meta-data android:name="com.amap.api.v2.apikey"
+                   android:value="97fb1da5cd4a493e7e2d52581a706962"/>
+
         <activity
             android:name=".ui.EditorActivity"
             android:launchMode="singleTask"
@@ -49,15 +57,26 @@
             android:name=".ui.MobSMSCodeActivity"
             android:launchMode="singleTask"
             android:theme="@style/MainTheme" />
-        <activity android:name=".ui.CollectActivity" />
-        <activity android:name=".ui.MessageActivity" />
-        <activity android:name=".ui.SignActivity" />
-        <activity android:name=".ui.MyCareActivity" />
-        <activity android:name=".ui.MyThemeActivity" />
+        <activity android:name=".ui.CollectActivity"
+                  android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.ReleaseActivity"
+                  android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.UserInfoActivity"
+                  android:theme="@style/MainTheme"/>
         <activity android:name=".ui.SettingsActivity" />
+        <activity android:name=".ui.ReadArticleActivity"
+                  android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.ViewUserInfoActivity"
+                  android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.UserListActivity"
+                  android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.EditUserInfoActivity"
+                  android:theme="@style/MainTheme"/>
+
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,6 +90,17 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
+        <activity
+            android:name="com.zaaach.citypicker.CityPickerActivity"
+            android:theme="@style/CityPicker.NoActionBar"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+
     </application>
+
+
+
 
 </manifest>

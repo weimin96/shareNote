@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.aoliao.notebook.helper.AppController;
+import com.aoliao.notebook.AppController;
 
 
 /**

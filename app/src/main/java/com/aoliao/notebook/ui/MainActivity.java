@@ -1,9 +1,8 @@
 package com.aoliao.notebook.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -23,112 +22,90 @@ import android.widget.Toast;
 
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.adapter.FragmentAdapter;
-import com.aoliao.notebook.factory.FragmentFactory;
-import com.aoliao.notebook.fragment.BaseMainFragment;
+import com.aoliao.notebook.contract.MainContract;
 import com.aoliao.notebook.fragment.MainFragment;
 import com.aoliao.notebook.fragment.NoteChatFragment;
-import com.aoliao.notebook.fragment.PersonalFragment;
 import com.aoliao.notebook.fragment.ShoppingFragment;
-import com.aoliao.notebook.helper.Config;
-import com.aoliao.notebook.helper.SQLiteManager;
-import com.aoliao.notebook.helper.SessionManager;
-import com.aoliao.notebook.model.entity.Msg;
+import com.aoliao.notebook.fragment.UserInfoFragment;
+import com.aoliao.notebook.utils.entity.User;
 import com.aoliao.notebook.presenter.MainPresenter;
-import com.aoliao.notebook.utils.FirHelper;
-import com.aoliao.notebook.utils.ToastUtil;
-import com.makeramen.roundedimageview.RoundedImageView;
-
-import org.greenrobot.eventbus.EventBus;
+import com.aoliao.notebook.utils.helper.FirHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
 
 
-public class MainActivity extends BaseActivity<MainPresenter>  {
-
-    private Handler handler;
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
     private FragmentTabHost tabHost;
     private ViewPager pager;
-    private List<Fragment> fragments;
-    private static final String TAG ="MainActivity";
+    protected static final String TAG_EXIT = "exit";
+    private ProgressDialog mProgressDialog=null;
+
 
     float editTime = 0;
-    private SessionManager sessionManager;
-    private SQLiteManager sqLiteManager;
     @BindView(R.id.navigationView)
     NavigationView navigationView;
-
-    //当前Fragment
-    private BaseMainFragment currentFragment;
+    TextView username;
+    ImageView headImage;
+    ImageView imgUserInfoBg;
 
     @Override
     protected int getContentId() {
         return R.layout.activity_main;
     }
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        sessionManager = new SessionManager(getApplicationContext());
-//        sqLiteManager = new SQLiteManager(getApplicationContext());
-//        if (!sessionManager.isLoggedIn()) {
-//            logoutUser();
-//        }
-
-        //获取headerLayout中的view
-
+    protected void onInit() {
+        super.onInit();
+        mProgressDialog=ProgressDialog.show(this,"请稍等","获取数据中",true);
+        Bmob.initialize(this,"3d9d9f910c51b02eea3d605178911aa5");
+        if (BmobUser.getCurrentUser(User.class) == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }
 
         tabHost = (FragmentTabHost) findViewById(R.id.tabHost);
-        pager = (ViewPager) findViewById(R.id.main_viewpager);
-
-
-        Bmob.initialize(this, "3d9d9f910c51b02eea3d605178911aa5");
 
         View view = navigationView.inflateHeaderView(R.layout.header_layout);
-
-//        TextView username = (TextView) view.findViewById(R.id.usernameId);
-//        username.setText(sqLiteManager.getUserDetails().get(Config.USERS_USERNAME));
-        RoundedImageView headImage = (RoundedImageView) view.findViewById(R.id.headId);
-        headImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                getFragmentManager().beginTransaction().add(R.id.container, new LoginActivity()).commit();
-
-            }
-        });
-
-
-
-
+        username = (TextView) view.findViewById(R.id.usernameId);
+        headImage = (ImageView) view.findViewById(R.id.headId);
+        imgUserInfoBg = (ImageView) view.findViewById(R.id.imgBackground);
+        presenter.requestUserInfo();
 
         initView();
         //初始化TabHost
         initTabHost();
         //初始化pager
         initPager();
-
         //添加监听关联TabHost和viewPager
         bindTabAndPager();
-
     }
 
+    @Override
+    public void displayUser(User user) {
 
-//    private void logoutUser() {
-//        //设置登陆状态为false
-//        sessionManager.setLogin(false);
-//        //数据库中删除用户信息
-//        sqLiteManager.deleteUsers();
-//        //跳转到登陆页面
-//        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
+        if (BmobUser.getCurrentUser(User.class) != null) {
+            username.setText(user.getNickname());
+            presenter.requestDisplayHeadPic(headImage, user.getHeadPic());
+            presenter.requestDisplayUserInfoBg(imgUserInfoBg, user.getHeadPic());
+        }
+        mProgressDialog.dismiss();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent != null) {
+            boolean isExit = intent.getBooleanExtra(TAG_EXIT, false);
+            if (isExit) {
+                this.finish();
+            }
+        }
+    }
 
     @Override
     protected void initToolbar(Toolbar toolbar) {
@@ -160,9 +137,8 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
              */
             @Override
             public void onTabChanged(String tabId) {
-                log("vonTabChanged:"+tabId);
                 int position = tabHost.getCurrentTab();
-                pager.setCurrentItem(position,true);
+                pager.setCurrentItem(position, true);
             }
         });
 
@@ -175,7 +151,6 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
              */
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                log("onPageScrolled=============position:"+position+"====positionOffset:"+positionOffset+"====positionOffsetPixels:"+positionOffsetPixels);
             }
 
             /**
@@ -183,9 +158,8 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
              * @param position 当前页面的index
              */
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
                 tabHost.setCurrentTab(position);
-                log("onPageSelected==========:position:"+position);
             }
 
             /**
@@ -195,19 +169,6 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
             @Override
             public void onPageScrollStateChanged(int state) {
 
-                String stateStr="";
-                switch (state){
-                    case ViewPager.SCROLL_STATE_DRAGGING:
-                        stateStr="正在拖动";
-                        break;
-                    case ViewPager.SCROLL_STATE_SETTLING:
-                        stateStr="正在去往最终位置 即将到达最终位置";
-                        break;
-                    case ViewPager.SCROLL_STATE_IDLE:
-                        stateStr="滑动停止，当前页面充满屏幕";
-                        break;
-                }
-                log("onPageScrollStateChanged========stateCode:"+state+"====state:"+stateStr);
             }
 
         });
@@ -218,12 +179,14 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
      * 初始化 pager 绑定适配器
      */
     private void initPager() {
-        fragments = new ArrayList<>();
+        pager = (ViewPager) findViewById(R.id.main_viewpager);
+        pager.setOffscreenPageLimit(1);
+        List<Fragment> fragments = new ArrayList<>();
         fragments.add(new MainFragment());
         fragments.add(new NoteChatFragment());
-        fragments.add(new PersonalFragment());
+        fragments.add(new UserInfoFragment());
         fragments.add(new ShoppingFragment());
-        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(),fragments);
+        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
         pager.setAdapter(adapter);
     }
 
@@ -231,49 +194,30 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
      * 初始化 TabHost
      */
     private void initTabHost() {
-
-        tabHost.setup(MainActivity.this,getSupportFragmentManager(), R.id.tabContent);
+        tabHost.setup(MainActivity.this, getSupportFragmentManager(), R.id.tabContent);
         tabHost.getTabWidget().setDividerDrawable(null);
-        tabHost.addTab(tabHost.newTabSpec("homepage").setIndicator(createView(R.drawable.homepage,"首页")), MainFragment.class,null);
-        tabHost.addTab(tabHost.newTabSpec("notechat").setIndicator(createView(R.drawable.notechat,"笔记圈")), NoteChatFragment.class,null);
-        tabHost.addTab(tabHost.newTabSpec("personal").setIndicator(createView(R.drawable.personal,"个人中心")), PersonalFragment.class,null);
-        tabHost.addTab(tabHost.newTabSpec("shopping").setIndicator(createView(R.drawable.shopping,"购书")), ShoppingFragment.class,null);
-
+        tabHost.addTab(tabHost.newTabSpec("homepage").setIndicator(createView(R.drawable.homepage, "首页")), MainFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("notechat").setIndicator(createView(R.drawable.notechat, "笔记圈")), NoteChatFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("personal").setIndicator(createView(R.drawable.personal, "个人中心")), UserInfoFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("shopping").setIndicator(createView(R.drawable.shopping, "消息")), ShoppingFragment.class, null);
     }
 
 
     /**
      * 返回view
+     *
      * @param icon
      * @param tab
      * @return
      */
-    private View createView(int icon,String tab){
-        View view = getLayoutInflater().inflate(R.layout.homepage,null);
+    private View createView(int icon, String tab) {
+        View view = getLayoutInflater().inflate(R.layout.homepage, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-        TextView  title = (TextView) view.findViewById(R.id.title);
+        TextView title = (TextView) view.findViewById(R.id.title);
         imageView.setImageResource(icon);
         title.setText(tab);
-        return  view;
+        return view;
     }
-
-    private void log(String log){
-        Log.e(TAG,"="+log+"=");
-    }
-
-/**
-    @Override
-    protected void onInit() {
-        super.onInit();
-        initView();
-        currentFragment = FragmentFactory.newFragment(Config.fragment.HOME);
-        addFragment(currentFragment, R.id.fragment_container);
-        handler = new Handler(Looper.getMainLooper());
-//        FirHelper.getInstance().checkUpdate(this);
-
-    }
- */
-
 
 
     @Override
@@ -286,12 +230,10 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
                 if (id == R.id.notebookMenuId) {
                     startActivity(new Intent(getApplication(), NoteActivity.class));
                 }
-                if (id == R.id.tarMenuId) {
-                }
                 if (id == R.id.recycleMenuId) {
                     startActivity(new Intent(getApplication(), RecycleActivity.class));
                 }
-                if (id == R.id.settingMenuId){
+                if (id == R.id.settingMenuId) {
                     startActivity(new Intent(getApplication(), SettingsActivity.class));
                 }
                 return false;
@@ -313,22 +255,6 @@ public class MainActivity extends BaseActivity<MainPresenter>  {
         }
     }
 
-    public static void startFragment(String fragmentKey) {
-        EventBus.getDefault().post(new Msg(Msg.GOTO_FRAGMENT, fragmentKey));
-    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        EventBus.getDefault().register(this);
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        EventBus.getDefault().unregister(this);
-//    }
-//
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -5,10 +5,6 @@ import com.aoliao.notebook.xmvp.XContract;
 import java.util.List;
 
 
-/**
- * Created by jiana on 16-11-20.
- */
-
 public interface RefreshContract {
 
     interface Presenter extends XContract.Presenter {

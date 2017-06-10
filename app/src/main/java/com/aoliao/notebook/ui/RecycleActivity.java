@@ -2,7 +2,6 @@ package com.aoliao.notebook.ui;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,10 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aoliao.notebook.R;
-import com.aoliao.notebook.model.Note;
-import com.aoliao.notebook.model.NoteAdapter;
-import com.aoliao.notebook.model.NoteDB;
-import com.aoliao.notebook.model.OnItemClickListener;
+import com.aoliao.notebook.adapter.NoteAdapter;
+import com.aoliao.notebook.utils.db.NoteDB;
+import com.aoliao.notebook.utils.listener.OnItemClickListener;
+import com.aoliao.notebook.utils.entity.Post;
 import com.aoliao.notebook.view.ListViewDecoration;
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
@@ -38,8 +37,7 @@ import java.util.ArrayList;
 
 public class RecycleActivity extends NoteActivity {
     private Activity mContext;
-    private ArrayList<Note> noteList;
-    private NoteDB mNoteDB;
+    private ArrayList<Post> noteList;
     private SQLiteDatabase mDatabase;
     private NoteAdapter noteAdapter;
     private SwipeMenuRecyclerView mMenuRecyclerView;
@@ -67,7 +65,6 @@ public class RecycleActivity extends NoteActivity {
     protected void initView() {
         super.initView();
         mMenuRecyclerView = (SwipeMenuRecyclerView) findViewById(R.id.recycle_view);
-        mNoteDB = new NoteDB(this);
         mDatabase = new NoteDB(this).getReadableDatabase();
     }
 
@@ -91,7 +88,7 @@ public class RecycleActivity extends NoteActivity {
             String content = cursor.getString(cursor.getColumnIndex("content"));
             Long time = cursor.getLong(cursor.getColumnIndex("time"));
             int id = cursor.getInt(cursor.getColumnIndex("id"));
-            Note note = new Note(title, content, time, id);
+            Post note = new Post(title, content, time, id);
             noteList.add(note);
         }
         noteAdapter = new NoteAdapter(this, noteList);
@@ -117,9 +114,9 @@ public class RecycleActivity extends NoteActivity {
             {
                 SwipeMenuItem deleteItem = new SwipeMenuItem(mContext)
 //                        .setBackgroundDrawable(R.drawable.selector_red)
-                        .setImage(R.mipmap.ic_delete_black_24dp)
+                        .setImage(R.mipmap.ic_delete_black)
                         .setText("删除") // 文字，还可以设置文字颜色，大小等。。
-                        .setTextColor(Color.RED)
+                        .setTextColor(Color.BLACK)
                         .setWidth(width)
                         .setHeight(height);
                 swipeRightMenu.addMenuItem(deleteItem);// 添加一个按钮到右侧侧菜单。
@@ -128,9 +125,9 @@ public class RecycleActivity extends NoteActivity {
             {
                 SwipeMenuItem restoreItem = new SwipeMenuItem(mContext)
 //                        .setBackgroundDrawable(R.drawable.selector_red)
-                        .setImage(R.mipmap.ic_delete_black_24dp)
+                        .setImage(R.mipmap.ic_delete_black)
                         .setText("恢复") // 文字，还可以设置文字颜色，大小等。。
-                        .setTextColor(Color.RED)
+                        .setTextColor(Color.BLACK)
                         .setWidth(width)
                         .setHeight(height);
                 swipeRightMenu.addMenuItem(restoreItem);// 添加一个按钮到右侧侧菜单。
@@ -142,7 +139,7 @@ public class RecycleActivity extends NoteActivity {
         @Override
         public void onItemClick(Closeable closeable, int adapterPosition, int menuPosition, int direction) {
             closeable.smoothCloseMenu();// 关闭被点击的菜单。
-            Note noteOne = noteList.get(adapterPosition);
+            Post noteOne = noteList.get(adapterPosition);
             if (menuPosition == 0) {// 删除按钮被点击。
                 mDatabase.delete(NoteDB.RECYCLE_TABLE, "id=?", new String[]{noteOne.getId() + ""});
                 noteList.remove(adapterPosition);
@@ -154,7 +151,7 @@ public class RecycleActivity extends NoteActivity {
                 cv.put(NoteDB.ID, noteOne.getId());
                 cv.put(NoteDB.TITLE, noteOne.getTitle());
                 cv.put(NoteDB.CONTENT, noteOne.getContent());
-                cv.put(NoteDB.TIME, noteOne.getEditTime());
+                cv.put(NoteDB.TIME, noteOne.getTime());
                 mDatabase.insert(NoteDB.TABLE_NAME, null, cv);
                 mDatabase.delete(NoteDB.RECYCLE_TABLE,"id=?",new String[]{noteOne.getId()+""});
                 noteList.remove(adapterPosition);

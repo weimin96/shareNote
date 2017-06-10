@@ -71,7 +71,7 @@
             android:paddingRight="12dp"
             android:paddingTop="8dp"
             android:text="取消"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorAccent"
             android:textSize="15sp"/>
 
         <TextView
@@ -86,7 +86,7 @@
             android:paddingRight="12dp"
             android:paddingTop="8dp"
             android:text="确定"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorAccent"
             android:textSize="15sp"
             android:visibility="visible"/>
     </RelativeLayout>

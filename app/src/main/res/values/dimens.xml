@@ -18,15 +18,15 @@
 
     <dimen name="app_bar_height">280dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="user_info_head_width">100dp</dimen>
-    <dimen name="user_info_height">290dp</dimen>
+    <dimen name="user_info_head_width">70dp</dimen>
+    <dimen name="user_info_height">200dp</dimen>
     <dimen name="pop_item_size">42dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="small_margin_min">4dp</dimen>
     <dimen name="item_edit_user_info_height">48dp</dimen>
 
     <dimen name="blog_card_elevation">2dp</dimen>
-    <dimen name="card_padding">14dp</dimen>
+    <dimen name="card_padding">5dp</dimen>
 
     <dimen name="card_padding_top">10dp</dimen>
     <dimen name="main_head_height">32dp</dimen>

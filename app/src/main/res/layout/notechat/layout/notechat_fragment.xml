@@ -5,21 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#ffffff">
-
-    </LinearLayout>
-
-
-
-
-
-    <include layout="@layout/notechat_title"/>
-
-
-
-
+        android:layout_height="match_parent"
+        android:text="@string/new_feature"
+        android:textSize="20sp"
+        android:gravity="center"/>
 
 </LinearLayout>

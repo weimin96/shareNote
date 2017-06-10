@@ -26,7 +26,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
-import com.aoliao.notebook.helper.AppController;
+import com.aoliao.notebook.AppController;
 
 import java.io.File;
 import java.text.DecimalFormat;

@@ -1,13 +1,12 @@
 package com.aoliao.notebook.xmvp;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.aoliao.notebook.utils.GenericHelper;
+import com.aoliao.notebook.utils.helper.GenericHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -42,8 +41,6 @@ public abstract class XBaseFragment<T extends XBasePresenter> extends android.su
         return rootView;
     }
 
-
-
     /**
      * 添加监听
      */
@@ -61,7 +58,6 @@ public abstract class XBaseFragment<T extends XBasePresenter> extends android.su
     public View getRootView() {
         return this.rootView;
     }
-
 
     @Override
     public void onDestroyView() {

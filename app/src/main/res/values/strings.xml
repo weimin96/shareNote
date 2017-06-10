@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">读书笔记</string>
+    <string name="app_name">share笔记</string>
     <string name="notebook">笔记本</string>
     <string name="recycle">回收站</string>
     <string name="tar">标签</string>
@@ -8,6 +8,7 @@
     <string name="about">关于</string>
     <string name="welcome">Welcome</string>
     <string name="username">请输入用户名</string>
+    <string name="enter_nickname">请输入昵称</string>
     <string name="password">请输入密码</string>
     <string name="password_check">请再次输入密码</string>
     <string name="login">登录</string>
@@ -29,7 +30,7 @@
     <string name="star">添加为收藏</string>
     <string name="btn_link_to_register">没有账号？立即注册。</string>
     <string name="btn_link_to_login">已经注册？立即登录。</string>
-    <string name="connecting">connecting...</string>
+    <string name="connecting">connecting…</string>
     <string name="connect_to_server">connect to server</string>
 
     <string name="self_info">个人信息</string>
@@ -41,11 +42,11 @@
     <string name="maohao">\@</string>
     <string name="add_comment">添加评论</string>
     <string name="send">发送</string>
-    <string name="add_comment_success">评论发表成功</string>
-    <string name="current_not_article">当前没有文章</string>
+    <string name="add_comment_success">发表评论成功</string>
+    <string name="current_not_article">当前没有笔记</string>
     <string name="comment_area">评论区</string>
     <string name="reply_comment_success">回复评论成功！</string>
-    <string name="like_cuccess">喜欢上了</string>
+    <string name="like_cuccess">收藏成功</string>
     <string name="follow_success">已关注</string>
     <string name="please_login">请登录</string>
     <string name="please_check_network_status">请检查网络</string>
@@ -119,8 +120,12 @@
     <string name="fans">粉丝</string>
     <string name="attention">关注</string>
     <string name="collect">收藏</string>
-    <string name="send_dynamic">发布的动态</string>
-    <string name="badge_level">徽章和等级</string>
+    <string name="my_public_dynamic">我的发布</string>
+    <string name="public_dynamic">发布笔记</string>
+    <string name="my_dynamic">私密笔记</string>
+    <string name="user_message">用户信息</string>
+    <string name="my_comment">我的评论</string>
+    <string name="exit_login">退出登录</string>
     <string name="read_section">订阅的栏目</string>
     <string name="login_success">登陆成功</string>
     <string name="upload_success">上传成功</string>
@@ -133,7 +138,9 @@
     <string name="please_input_content">请输入内容！</string>
     <string name="release_fail">发布失败</string>
     <string name="release_success">发布成功</string>
-    <string name="now_releasing_article">正在发布帖子…</string>
+    <string name="save_fail">发布失败</string>
+    <string name="save_success">发布成功</string>
+    <string name="now_releasing_article">正在发布笔记…</string>
     <string name="network_err">Simulation network error</string>
     <string name="jin">#</string>
 
@@ -141,16 +148,19 @@
     <string name="cache_size">缓存大小</string>
     <string name="copy_right" translatable="false">Copyrights © 2016</string>
     <string name="contact_me">联系我</string>
-    <string name="yanzhengma">免费获取短信验证码</string>
+    <string name="yanzhengma">获取短信验证码</string>
     <string name="title_activity_setting">设置</string>
     <string name="net_mode">网络模式</string>
     <string name="update_wifi">Wifi下自动更新</string>
     <string name="account_binding">账号和绑定设置</string>
     <string name="message_personal">消息和隐私设置</string>
     <string name="help_feedback">帮助与反馈</string>
-    <string name="guanyudushubiji">关于读书笔记</string>
+    <string name="guanyudushubiji">关于share笔记</string>
     <string name="update_operate">手动检查更新</string>
     <string name="version">版本</string>
 
+    
+    <string name="cancel_collection">取消收藏</string>
+    <string name="new_feature">新功能敬请期待</string>
 
 </resources>

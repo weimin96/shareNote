@@ -3,9 +3,6 @@ package com.aoliao.notebook.utils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
-/**
- * Created by jiana on 16-11-5.
- */
 
 public class MD5Util {
     /**

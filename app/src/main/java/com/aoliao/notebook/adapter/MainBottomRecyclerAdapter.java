@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.aoliao.notebook.R;
-import com.aoliao.notebook.model.entity.Post;
+import com.aoliao.notebook.utils.entity.Post;
 import com.aoliao.notebook.utils.ImgLoadUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -15,8 +15,9 @@ import java.util.ArrayList;
 
 
 public class MainBottomRecyclerAdapter extends BaseQuickAdapter<Post, BaseViewHolder> {
-    public MainBottomRecyclerAdapter() {
-        super(R.layout.item_main_card, new ArrayList<Post>());
+
+    public MainBottomRecyclerAdapter(int layoutId) {
+        super(layoutId, new ArrayList<Post>());
     }
 
     @Override

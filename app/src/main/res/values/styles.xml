@@ -45,13 +45,33 @@
         <item name="android:textCursorDrawable">@drawable/black_background</item>
     </style>
 
+    <style name="userInfoUINumStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_level3</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
+    <style name="userInfoUINumNameStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_color_level_1_2</item>
+    </style>
 
-
-
-
-
-
-
+    <style name="userInfoUIVerticalLineStyle">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@color/text_color_level_1_2</item>
+    </style>
+    <style name="popupShowAnExit">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
 
 </resources>

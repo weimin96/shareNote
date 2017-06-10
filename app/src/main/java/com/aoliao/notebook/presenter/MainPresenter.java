@@ -1,41 +1,25 @@
-/*
- * Copyright 2016 XuJiaji
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.aoliao.notebook.presenter;
 
-import com.aoliao.notebook.R;
+import android.widget.ImageView;
+
 import com.aoliao.notebook.contract.MainContract;
-import com.aoliao.notebook.helper.AppController;
-import com.aoliao.notebook.model.data.DataFiller;
-import com.aoliao.notebook.model.entity.User;
+import com.aoliao.notebook.fragment.BaseMainFragment;
+import com.aoliao.notebook.fragment.UserInfoFragment;
+import com.aoliao.notebook.config.Config;
+import com.aoliao.notebook.utils.data.DataFiller;
+import com.aoliao.notebook.utils.entity.User;
+import com.aoliao.notebook.ui.UserInfoActivity;
+import com.aoliao.notebook.utils.ImgLoadUtil;
 import com.aoliao.notebook.xmvp.XBasePresenter;
-import com.aoliao.notebook.xmvp.XContract;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainPresenter extends XBasePresenter implements MainContract.Presenter {
+public class MainPresenter extends XBasePresenter<MainContract.View> implements MainContract.Presenter {
+    private User user;
 
-
-    public MainPresenter(XContract.View view) {
+    public MainPresenter(MainContract.View view) {
         super(view);
     }
 
@@ -47,6 +31,35 @@ public class MainPresenter extends XBasePresenter implements MainContract.Presen
     @Override
     public User getUser() {
         return DataFiller.getLocalUser();
+    }
+
+    @Override
+    public void requestUserInfo() {
+        if (UserInfoFragment.SelfSwitch&& UserInfoActivity.SelfSwitch) {
+            user = DataFiller.getLocalUser();
+            view.displayUser(user);
+        } else {
+            user = BaseMainFragment.getData(Config.data.KEY_USER);
+            if (user != null) {
+                if (DataFiller.getLocalUser() != null && user.getObjectId().equals(DataFiller.getLocalUser().getObjectId())) {
+                    UserInfoFragment.SelfSwitch = true;
+                    UserInfoActivity.SelfSwitch=true;
+                }
+                view.displayUser(user);
+                BaseMainFragment.clearData();
+            }
+        }
+    }
+
+    @Override
+    public void requestDisplayHeadPic(ImageView imgHead, String url) {
+        ImgLoadUtil.loadHead(imgHead.getContext(), imgHead, url);
+    }
+
+
+    @Override
+    public void requestDisplayUserInfoBg(ImageView imgUserInfoBg, String url) {
+        ImgLoadUtil.loadBitmap(imgUserInfoBg.getContext(), imgUserInfoBg, url);
     }
 
 

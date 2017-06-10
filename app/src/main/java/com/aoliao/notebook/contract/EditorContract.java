@@ -1,26 +1,8 @@
-/*
- * Copyright 2016 XuJiaji
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.aoliao.notebook.contract;
 
 
 import com.aoliao.notebook.xmvp.XContract;
 
-/**
- * Created by jiana on 16-7-27.
- */
 public interface EditorContract {
     interface Presenter extends XContract.Presenter {
         /**
@@ -36,6 +18,16 @@ public interface EditorContract {
          * @param article 文章
          */
         void uploadArticle(String coverPicture, String title, String article);
+
+        /**
+         * 保存文章
+         * @param coverPicture
+         * @param title
+         * @param article
+         */
+        void saveArticle(String coverPicture, String title, String article);
+
+
     }
 
     interface View extends XContract.View {
@@ -77,5 +69,16 @@ public interface EditorContract {
          * @param err
          */
         void uploadArticleFail(String err);
+
+        /**
+         * 上传文章成功
+         */
+        void saveArticleSuccess();
+
+        /**
+         * 上传文章失败
+         * @param err
+         */
+        void saveArticleFail(String err);
     }
 }

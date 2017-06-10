@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.aoliao.notebook.utils.GenericHelper;
+import com.aoliao.notebook.utils.helper.GenericHelper;
 
 import butterknife.ButterKnife;
 
@@ -59,6 +59,5 @@ public abstract class XBaseActivity<T extends XBasePresenter> extends AppCompatA
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        presenter.end();
     }
 }

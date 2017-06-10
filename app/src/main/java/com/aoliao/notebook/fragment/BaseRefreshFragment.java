@@ -1,5 +1,6 @@
 package com.aoliao.notebook.fragment;
 
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.contract.RefreshContract;
-import com.aoliao.notebook.utils.LogUtil;
 import com.aoliao.notebook.utils.ToastUtil;
 import com.aoliao.notebook.xmvp.XBasePresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,7 +20,6 @@ import java.util.List;
 
 
 /**
- * Created by jiana on 16-11-20.
  * 抽象刷新功能
  */
 
@@ -36,13 +35,13 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
     private View notLoadingView;
     private RecyclerView mRecyclerView;
 
+
     @Override
     protected void onInit() {
         super.onInit();
         mAdapter = getAdapter();
         mRecyclerView = getRecyclerView();
         swipeLayout = getSwipeLayout();
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         swipeLayout.setOnRefreshListener(this);
         mAdapter.openLoadAnimation();
@@ -50,6 +49,7 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
         mAdapter.setOnLoadMoreListener(this);
         mRecyclerView.setAdapter(mAdapter);
     }
+
 
     protected abstract BaseQuickAdapter<X, BaseViewHolder> getAdapter();
 //
@@ -72,6 +72,7 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
         mCurrentCounter = PAGE_SIZE;
         swipeLayout.setRefreshing(false);
     }
+
 
     /**
      * 更新失败
@@ -135,8 +136,7 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
 
     @Override
     public void onRefresh() {
-        LogUtil.e3("getPresenter()     = " + getPresenter());
-        getPresenter().requestUpdateListData();
+            getPresenter().requestUpdateListData();
     }
 
     @Override

@@ -1,9 +1,5 @@
 package com.aoliao.notebook.utils;
 
-/**
- * Created by Administrator on 2017/5/14 0014.
- */
-
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -13,7 +9,6 @@ import android.graphics.Paint;
 import java.util.Random;
 
 /**
- * Created by yao
  * 用于图片验证码的工具类
  */
 public class CodeUtils {

@@ -7,10 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,13 +16,12 @@ import android.widget.Toast;
 
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.contract.ReadActicleContract;
-import com.aoliao.notebook.model.Note;
-import com.aoliao.notebook.model.NoteAdapter;
-import com.aoliao.notebook.model.NoteDB;
-import com.aoliao.notebook.model.OnItemClickListener;
-import com.aoliao.notebook.model.entity.Comment;
-import com.aoliao.notebook.model.entity.Post;
-import com.aoliao.notebook.model.entity.Reply;
+import com.aoliao.notebook.adapter.NoteAdapter;
+import com.aoliao.notebook.utils.db.NoteDB;
+import com.aoliao.notebook.utils.listener.OnItemClickListener;
+import com.aoliao.notebook.utils.entity.Comment;
+import com.aoliao.notebook.utils.entity.Post;
+import com.aoliao.notebook.utils.entity.Reply;
 import com.aoliao.notebook.presenter.ReadArticlePresenter;
 import com.aoliao.notebook.view.ListViewDecoration;
 import com.yanzhenjie.recyclerview.swipe.Closeable;
@@ -44,7 +41,7 @@ import java.util.List;
 
 public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements ReadActicleContract.View {
     private Activity mContext;
-    private ArrayList<Note> noteList;
+    private ArrayList<Post> noteList;
     private NoteDB mNoteDB;
     private SQLiteDatabase mDatabase;
     private Cursor cursor;
@@ -86,11 +83,6 @@ public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
 
     @Override
     protected void onResume() {
@@ -106,7 +98,7 @@ public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements
             String content = cursor.getString(cursor.getColumnIndex("content"));
             Long time = cursor.getLong(cursor.getColumnIndex("time"));
             int id = cursor.getInt(cursor.getColumnIndex("id"));
-            Note note = new Note(title, content, time, id);
+            Post note = new Post(title, content, time, id);
             noteList.add(note);
         }
         noteAdapter = new NoteAdapter(this, noteList);
@@ -150,9 +142,9 @@ public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements
             {
                 SwipeMenuItem deleteItem = new SwipeMenuItem(mContext)
 //                        .setBackgroundDrawable(R.drawable.selector_red)
-                        .setImage(R.mipmap.ic_delete_black_24dp)
+                        .setImage(R.mipmap.ic_delete_black)
                         .setText("删除") // 文字，还可以设置文字颜色，大小等。。
-                        .setTextColor(Color.RED)
+                        .setTextColor(Color.BLACK)
                         .setWidth(width)
                         .setHeight(height);
                 swipeRightMenu.addMenuItem(deleteItem);// 添加一个按钮到右侧侧菜单。
@@ -179,7 +171,7 @@ public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements
             }
             // TODO 如果是删除：推荐调用Adapter.notifyItemRemoved(position)，不推荐Adapter.notifyDataSetChanged();
             if (menuPosition == 0) {// 删除按钮被点击。
-                Note noteOne = noteList.get(adapterPosition);
+                Post noteOne = noteList.get(adapterPosition);
                 ContentValues cv = new ContentValues();
                 cv.put(NoteDB.ID, noteOne.getId());
                 cv.put(NoteDB.TITLE, noteOne.getTitle());
