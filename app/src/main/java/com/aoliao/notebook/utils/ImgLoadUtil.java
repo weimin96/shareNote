@@ -38,8 +38,6 @@ public class ImgLoadUtil {
         Glide.with(context)
                 .load(url)
                 .asBitmap()
-                .placeholder(R.mipmap.sidebar)
-                .error(R.mipmap.sidebar)
                 .into(img);
 
     }
@@ -71,7 +69,6 @@ public class ImgLoadUtil {
     public static void loadWriteImg(Context context, final ImageView img, final Write.Content content) {
         Glide.with(context)
                 .load(content.getImg())
-                .error(R.mipmap.sidebar)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(img);
 

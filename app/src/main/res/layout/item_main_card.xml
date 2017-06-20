@@ -74,7 +74,6 @@
                         android:paddingTop="@dimen/small_margin"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/sidebar"
                         />
 
 

@@ -15,8 +15,6 @@ public class GlideImageLoader extends ImageLoader {
         //Glide 加载图片简单用法
         Glide.with(context)
                 .load(path)
-                .placeholder(R.mipmap.sidebar)
-                .error(R.mipmap.sidebar)
                 .crossFade()
                 .into(imageView);
     }
