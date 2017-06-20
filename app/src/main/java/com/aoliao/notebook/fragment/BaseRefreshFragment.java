@@ -1,6 +1,5 @@
 package com.aoliao.notebook.fragment;
 
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -52,7 +51,8 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
 
 
     protected abstract BaseQuickAdapter<X, BaseViewHolder> getAdapter();
-//
+
+    //
     protected abstract SwipeRefreshLayout getSwipeLayout();
 
     protected abstract RecyclerView getRecyclerView();
@@ -136,7 +136,7 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
 
     @Override
     public void onRefresh() {
-            getPresenter().requestUpdateListData();
+        getPresenter().requestUpdateListData();
     }
 
     @Override
@@ -145,6 +145,6 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
     }
 
     private RefreshContract.Presenter getPresenter() {
-        return  (RefreshContract.Presenter) presenter;
+        return (RefreshContract.Presenter) presenter;
     }
 }

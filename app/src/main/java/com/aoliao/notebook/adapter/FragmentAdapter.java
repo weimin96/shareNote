@@ -10,8 +10,8 @@ import java.util.List;
  */
 
 public class FragmentAdapter extends FragmentPagerAdapter {
-    List<Fragment> fragments ;
-    private String[] titles = new String[]{"首页","笔记圈","个人中心","购书"};
+    public List<Fragment> fragments ;
+    private String[] titles = new String[]{"首页","笔记圈","个人中心","消息"};
     public FragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments =fragments;

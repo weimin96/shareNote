@@ -88,7 +88,6 @@ public class EditUserInfoActivity extends BaseActivity<EditUserInfoPresenter> im
                         editInfo(R.string.edit_nickname);
                         break;
                     case Config.euii.SEX:
-                        Log.i("aaa","editsex");
                         editSex();
                         break;
                     case Config.euii.PHONE:
@@ -263,12 +262,10 @@ public class EditUserInfoActivity extends BaseActivity<EditUserInfoPresenter> im
         ToastUtil.getInstance().showLongT(getString(R.string.update_head_success));
         adapter.update();
         FragmentFactory.updatedUser();
-        setUpdatedUser(false);
     }
 
     private void update() {
         adapter.update();
-        setUpdatedUser(false);
         FragmentFactory.updatedUser();
     }
 

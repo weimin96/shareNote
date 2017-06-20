@@ -3,9 +3,6 @@
 package com.aoliao.notebook.utils;
 
 
-
-import android.util.Log;
-
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.factory.ErrMsgFactory;
 import com.aoliao.notebook.AppController;
@@ -164,6 +161,7 @@ public class NetRequest {
 
     /**
      * 跟随该用户
+     *
      * @param user
      * @param listener
      */
@@ -231,12 +229,12 @@ public class NetRequest {
     public void deleteArticle(final Post post, final RequestListener<String> listener) {
         if (!checkNet(listener)) return;
         if (!checkLoginStatus(listener)) return;
-        post.delete(post.getObjectId(),new UpdateListener() {
+        post.delete(post.getObjectId(), new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                if(e==null){
+                if (e == null) {
                     listener.success(null);
-                }else{
+                } else {
                     listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
@@ -362,6 +360,7 @@ public class NetRequest {
 
     /**
      * 获取所有回复
+     *
      * @param comments
      * @param listener
      */
@@ -396,9 +395,9 @@ public class NetRequest {
                     public void onNext(List<Reply> replies) {
                         replyList.addAll(replies);
                         nowNum++;
-                        if (numTotal==nowNum) {
-                                listener.success(replyList);
-                            }
+                        if (numTotal == nowNum) {
+                            listener.success(replyList);
+                        }
                     }
                 });
     }
@@ -449,11 +448,12 @@ public class NetRequest {
 
     /**
      * 获取该用户发布的帖子
+     *
      * @param currentIndex
      * @param size
      * @param listener
      */
-    public void pullReleasePost(String userId,int currentIndex, int size, final RequestListener<List<Post>> listener) {
+    public void pullReleasePost(String userId, int currentIndex, int size, final RequestListener<List<Post>> listener) {
         if (!checkNet(listener)) return;
         BmobQuery<Post> query = new BmobQuery<>();
 
@@ -477,6 +477,7 @@ public class NetRequest {
 
     /**
      * 获取收藏/喜欢的帖子
+     *
      * @param currentIndex
      * @param size
      * @param listener
@@ -528,7 +529,7 @@ public class NetRequest {
         });
     }
 
-    public void queryPost(String objectId,final RequestListener<Post> listener){
+    public void queryPost(String objectId, final RequestListener<Post> listener) {
         if (!checkNet(listener)) return;
         BmobQuery<Post> query = new BmobQuery<>();
         query.getObject(objectId, new QueryListener<Post>() {
@@ -578,6 +579,7 @@ public class NetRequest {
 
     /**
      * 保存文章
+     *
      * @param coverPicture
      * @param title
      * @param article
@@ -610,6 +612,7 @@ public class NetRequest {
 
     /**
      * 注册
+     *
      * @param user
      */
     public void userRegister(User user, final RequestListener<User> listener) {
@@ -628,6 +631,7 @@ public class NetRequest {
 
     /**
      * 登录
+     *
      * @param username
      * @param password
      * @param listener
@@ -770,7 +774,7 @@ public class NetRequest {
         if (!checkNet(listener)) return;
         final User newUser = new User();
         User user = BmobUser.getCurrentUser(User.class);
-        int sex=user.getSex();
+        int sex = user.getSex();
         newUser.setSex(sex);
         switch (type) {
             case NICKNAME:
@@ -878,6 +882,7 @@ public class NetRequest {
 
     /**
      * 检测网络
+     *
      * @param listener
      * @return
      */

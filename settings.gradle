@@ -1,1 +1,1 @@
-include ':app', ':sweetAlertDialog'
+include ':app', ':sweetAlertDialog', ':badge'

@@ -21,29 +21,17 @@ import java.util.List;
 
 public class NoteAdapter extends SwipeMenuAdapter<NoteAdapter.DefaultViewHolder> {
     private List<Post> list;
-    private LayoutInflater mInflater;
     private Context context;
     private OnItemClickListener mOnItemClickListener;
 
     public NoteAdapter(Context context, List<Post> list) {
         this.list = list;
         this.context = context;
-        mInflater = LayoutInflater.from(context);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
-
-//    @Override
-//    public int getCount() {
-//        return list.size();
-//    }
-//
-//    @Override
-//    public Object getItem(int position) {
-//        return list.get(position);
-//    }
 
     @Override
     public int getItemCount() {

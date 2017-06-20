@@ -2,7 +2,6 @@ package com.aoliao.notebook.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,7 +42,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private FragmentTabHost tabHost;
     private ViewPager pager;
     protected static final String TAG_EXIT = "exit";
-    private ProgressDialog mProgressDialog=null;
+    private ProgressDialog mProgressDialog = null;
 
 
     float editTime = 0;
@@ -62,8 +60,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void onInit() {
         super.onInit();
-        mProgressDialog=ProgressDialog.show(this,"请稍等","获取数据中",true);
-        Bmob.initialize(this,"3d9d9f910c51b02eea3d605178911aa5");
+        mProgressDialog = ProgressDialog.show(this, "请稍等", "获取数据中", true);
+        Bmob.initialize(this, "3d9d9f910c51b02eea3d605178911aa5");
         if (BmobUser.getCurrentUser(User.class) == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }

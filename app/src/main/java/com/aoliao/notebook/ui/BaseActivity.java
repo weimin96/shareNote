@@ -20,14 +20,11 @@ import java.util.Map;
  * Created by 你的奥利奥 on 2017/1/25.
  */
 
-public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivity<T> implements NetWorkBroadcastReceiver.NetEvevt{
+public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivity<T> implements NetWorkBroadcastReceiver.NetEvevt {
     public static NetWorkBroadcastReceiver.NetEvevt evevt;
 
     //网络类型
     private int mNetType;
-
-    //是否更新过用户信息
-    private boolean updatedUser = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,15 +91,13 @@ public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivi
         }
         return false;
     }
-    public void setUpdatedUser(boolean updatedUser) {
-        this.updatedUser = updatedUser;
-    }
 
     //保存一些数据
     private static Map<String, Object> dataSave = new HashMap<>(2);
 
     /**
      * 获取数据
+     *
      * @param key
      * @param <D>
      * @return
@@ -115,8 +110,10 @@ public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivi
             return (D) obj;
         }
     }
+
     /**
      * 保存数据
+     *
      * @param key
      * @param obj
      */

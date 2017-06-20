@@ -22,9 +22,9 @@ public abstract class XBaseActivity<T extends XBasePresenter> extends AppCompatA
         beforeSetContentView();
         setContentView(getContentId());
         ButterKnife.bind(this);
-        try{
+        try {
             presenter = GenericHelper.initPresenter(this);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         onInit();
@@ -43,15 +43,18 @@ public abstract class XBaseActivity<T extends XBasePresenter> extends AppCompatA
     /**
      * 在这里面进行初始化
      */
-    protected void onInit() {}
+    protected void onInit() {
+    }
 
     /**
      * 这里面写监听事件
      */
-    protected void onListener() {}
+    protected void onListener() {
+    }
 
     /**
      * 获取布局的id
+     *
      * @return
      */
     protected abstract int getContentId();

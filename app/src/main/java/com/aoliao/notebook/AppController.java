@@ -13,11 +13,9 @@ import com.aoliao.notebook.ui.MainActivity;
 import cn.bmob.v3.Bmob;
 
 /**
- * 用于提供全局变量,包括request对列
+ * 用于提供全局变量
  */
 public class AppController extends Application {
-    public static final String TAG = AppController.class.getSimpleName();
-    private RequestQueue myRequestQueue;
     private static AppController mInstance;
     private static Context mContext;
 
@@ -32,32 +30,6 @@ public class AppController extends Application {
         return mInstance;
     }
 
-    //获取requestqueue
-    public RequestQueue getMyRequestQueue() {
-        if (myRequestQueue == null) {
-            myRequestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-        return myRequestQueue;
-    }
-
-    //向requestqueue中添加自定义tag的request
-    public <T> void addToRequestQueue(Request<T> request, String tag) {
-        request.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
-        getMyRequestQueue().add(request);
-    }
-
-    //向requestqueue中添加带默认tag的request
-    public <T> void addToRequestQueue(Request<T> request) {
-        request.setTag(TAG);
-        getMyRequestQueue().add(request);
-    }
-
-    //删除所有tag的request
-    public void cancelPendingRequests(Object tag) {
-        if (myRequestQueue != null) {
-            myRequestQueue.cancelAll(tag);
-        }
-    }
     public static Context getAppContext() {
         return mContext;
     }

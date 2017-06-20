@@ -1,9 +1,6 @@
 package com.aoliao.notebook.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -25,7 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implements UserInfoContract.View {
-    public static boolean SelfSwitch=true;
+    public static boolean SelfSwitch = true;
     @BindView(R.id.imgHead)
     ImageView imgHead;
     @BindView(R.id.imgUserInfoBg)
@@ -66,7 +63,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
         tvNickname.getPaint().setFakeBoldText(true);
     }
 
-    @OnClick({R.id.headLayout, R.id.btnFans, R.id.btnFocus, R.id.btnCollect,R.id.exit_login,R.id.publicDynamic,R.id.userMessage,R.id.myDynamic})
+    @OnClick({R.id.headLayout, R.id.btnFans, R.id.btnFocus, R.id.btnCollect, R.id.exit_login, R.id.publicDynamic, R.id.userMessage, R.id.myDynamic})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.headLayout:
@@ -104,7 +101,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
     private void goUserList(int pageType) {
         saveData(UserListContract.class.getSimpleName(), pageType);
         saveData(User.class.getSimpleName(), presenter.getUser());
-        startActivity(new Intent(getActivity(),UserListActivity.class));
+        startActivity(new Intent(getActivity(), UserListActivity.class));
     }
 
 
@@ -116,7 +113,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
 
     @Override
     public void displayUser(User user) {
-        tvNickname.setText("@" +user.getNickname());
+        tvNickname.setText("@" + user.getNickname());
         tvSign.setText(user.getSign());
         presenter.requestDisplayHeadPic(imgHead, user.getHeadPic());
         presenter.requestDisplayUserInfoBg(imgUserInfoBg, user.getHeadPic());

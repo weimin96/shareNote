@@ -1,8 +1,5 @@
 package com.aoliao.notebook.ui;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,7 +25,7 @@ import java.util.List;
  * Created by 你的奥利奥 on 2017/6/4.
  */
 
-public abstract class BaseRefreshActivity <X, T extends XBasePresenter> extends BaseActivity<T> implements
+public abstract class BaseRefreshActivity<X, T extends XBasePresenter> extends BaseActivity<T> implements
         RefreshContract.View<X>,
         BaseQuickAdapter.RequestLoadMoreListener,
         SwipeRefreshLayout.OnRefreshListener {
@@ -43,7 +40,7 @@ public abstract class BaseRefreshActivity <X, T extends XBasePresenter> extends 
     @Override
     protected void onInit() {
         super.onInit();
-        Log.i("aaa","onInit");
+        Log.i("aaa", "onInit");
 
         mAdapter = getAdapter();
         mRecyclerView = getRecyclerView();
@@ -64,6 +61,7 @@ public abstract class BaseRefreshActivity <X, T extends XBasePresenter> extends 
     }
 
     protected abstract BaseQuickAdapter<X, BaseViewHolder> getAdapter();
+
     //
     protected abstract SwipeRefreshLayout getSwipeLayout();
 
@@ -80,7 +78,6 @@ public abstract class BaseRefreshActivity <X, T extends XBasePresenter> extends 
         mCurrentCounter = PAGE_SIZE;
         swipeLayout.setRefreshing(false);
     }
-
 
 
     /**
@@ -145,7 +142,7 @@ public abstract class BaseRefreshActivity <X, T extends XBasePresenter> extends 
     }
 
     private RefreshContract.Presenter getPresenter() {
-        return  (RefreshContract.Presenter) presenter;
+        return (RefreshContract.Presenter) presenter;
     }
 
 

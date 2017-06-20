@@ -32,7 +32,7 @@ import cn.smssdk.SMSSDK;
  * Created by Administrator on 2017/5/13 0013.
  */
 
-public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implements View.OnClickListener{
+public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implements View.OnClickListener {
     private static final String TAG = "SmsYanzheng";
     private ImageView image;
     private EditText et;
@@ -43,8 +43,8 @@ public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implemen
     EditText mEditTextCode;
     Button mButtonGetCode;
     Button mButtonLogin;
-    String APPKEY="1d9d83c7ab3a1";
-    String APPSECRET="1035ca1a1edac05a1fa0dd80449e3f67";
+    String APPKEY = "1d9d83c7ab3a1";
+    String APPSECRET = "1035ca1a1edac05a1fa0dd80449e3f67";
     EventHandler eventHandler;
     String strPhoneNumber;
 
@@ -59,7 +59,7 @@ public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implemen
     }
 
 
-        @Override
+    @Override
     protected void initToolbar(Toolbar toolbar) {
         super.initToolbar(toolbar);
         toolbar.setTitle("注册");
@@ -72,7 +72,7 @@ public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implemen
     }
 
 
-    private void initView(){
+    private void initView() {
         initToolbar(toolbar);
         mEditTextPhoneNumber = (EditText) findViewById(R.id.phone_number);
         mEditTextCode = (EditText) findViewById(R.id.code);
@@ -90,8 +90,8 @@ public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implemen
         Bitmap bitmap = codeUtils.createBitmap();
         image.setImageBitmap(bitmap);
         //初始化sdk
-        SMSSDK.initSDK(this,APPKEY,APPSECRET);
-        eventHandler=new EventHandler(){
+        SMSSDK.initSDK(this, APPKEY, APPSECRET);
+        eventHandler = new EventHandler() {
             /**
              * 在操作之后被触发
              *
@@ -131,7 +131,7 @@ public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implemen
                 break;
             case R.id.get_code:
                 strPhoneNumber = mEditTextPhoneNumber.getText().toString();
-                if (strPhoneNumber == null || "".equals(strPhoneNumber) || strPhoneNumber.length() !=11) {
+                if (strPhoneNumber == null || "".equals(strPhoneNumber) || strPhoneNumber.length() != 11) {
                     Toast.makeText(getApplicationContext(), "电话号码输入有误", Toast.LENGTH_SHORT).show();
                 }
                 codeStr = et.getText().toString().trim();
@@ -162,7 +162,7 @@ public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implemen
                         }
                     }.start();
                     mLayout_send.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "验证码错误", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -174,6 +174,7 @@ public class MobSMSCodeActivity extends BaseActivity<RegisterPresenter> implemen
                 break;
         }
     }
+
     Handler myHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

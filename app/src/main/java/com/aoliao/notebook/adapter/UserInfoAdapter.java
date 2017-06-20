@@ -1,6 +1,5 @@
 package com.aoliao.notebook.adapter;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
-import java.util.logging.Handler;
 
 public class UserInfoAdapter extends BaseQuickAdapter<EditItem, BaseViewHolder> {
     public UserInfoAdapter(User user) {
@@ -22,13 +20,13 @@ public class UserInfoAdapter extends BaseQuickAdapter<EditItem, BaseViewHolder> 
     }
 
     public void update() {
-        List<EditItem> itemList = getData();
-        itemList.clear();
-        List<EditItem> newList = DataFiller.getEditList(DataFiller.getLocalUser());
-        if (newList == null) {
+        List<EditItem> data = getData();
+        data.clear();
+        List<EditItem> newData = DataFiller.getEditList(DataFiller.getLocalUser());
+        if (newData == null) {
             return;
         }
-        itemList.addAll(newList);
+        data.addAll(newData);
         notifyDataSetChanged();
     }
 

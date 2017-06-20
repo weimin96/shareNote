@@ -7,11 +7,13 @@ package com.aoliao.notebook.xmvp;
 
 public class XBasePresenter<T extends XContract.View> {
     protected T view;
+
     public XBasePresenter(T view) {
         this.view = view;
     }
 
-    public void start() {}
+    public void start() {
+    }
 
     public void end() {
         view = null;

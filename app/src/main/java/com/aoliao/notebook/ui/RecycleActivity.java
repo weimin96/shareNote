@@ -153,7 +153,7 @@ public class RecycleActivity extends NoteActivity {
                 cv.put(NoteDB.CONTENT, noteOne.getContent());
                 cv.put(NoteDB.TIME, noteOne.getTime());
                 mDatabase.insert(NoteDB.TABLE_NAME, null, cv);
-                mDatabase.delete(NoteDB.RECYCLE_TABLE,"id=?",new String[]{noteOne.getId()+""});
+                mDatabase.delete(NoteDB.RECYCLE_TABLE, "id=?", new String[]{noteOne.getId() + ""});
                 noteList.remove(adapterPosition);
                 noteAdapter.notifyItemRemoved(adapterPosition);
             }

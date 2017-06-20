@@ -12,7 +12,6 @@ import android.widget.EditText;
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.contract.LoginContract;
 import com.aoliao.notebook.factory.FragmentFactory;
-import com.aoliao.notebook.utils.db.SQLiteManager;
 import com.aoliao.notebook.utils.entity.User;
 import com.aoliao.notebook.presenter.LoginPresenter;
 import com.aoliao.notebook.utils.ToastUtil;
@@ -46,8 +45,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     }
 
 
-
-    private void initView(){
+    private void initView() {
         //如果用户已经登陆,那么跳转到用户页面
         if (BmobUser.getCurrentUser(User.class) != null) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -78,8 +76,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         back();
     }
 
-    private void back(){
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+    private void back() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(MainActivity.TAG_EXIT, true);
         startActivity(intent);
     }
@@ -93,18 +91,18 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     }
 
     @OnClick({R.id.btnLogin, R.id.btnRegistered})
-        void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btnLogin:
-                    usernameWrapper.setErrorEnabled(false);
-                    usernameWrapper.setErrorEnabled(false);
-                    presenter.requestLogin(username.getText().toString().trim(), password.getText().toString().trim());
-                    break;
-                case R.id.btnRegistered:
-                    Intent intent=new Intent(this,MobSMSCodeActivity.class);
-                    startActivity(intent);
-                    break;
-            }
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnLogin:
+                usernameWrapper.setErrorEnabled(false);
+                usernameWrapper.setErrorEnabled(false);
+                presenter.requestLogin(username.getText().toString().trim(), password.getText().toString().trim());
+                break;
+            case R.id.btnRegistered:
+                Intent intent = new Intent(this, MobSMSCodeActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
@@ -127,7 +125,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         }
         FragmentFactory.updatedUser();
 
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 

@@ -7,49 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
-
 public abstract class BaseMainFragment<T extends XBasePresenter> extends BaseFragment<T> {
 
     //是否更新过用户信息
     private boolean updatedUser = false;
-
-//    /** Fragment当前状态是否可见 */
-//    protected boolean isVisible;
-
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//
-//        if(getUserVisibleHint()) {
-//            isVisible = true;
-//            onVisible();
-//        } else {
-//            isVisible = false;
-//            onInvisible();
-//        }
-//    }
-
-    /**
-     * 可见
-     */
-//    protected void onVisible() {
-//        lazyLoad();
-//    }
-
-    /**
-     * 不可见
-     */
-//    protected void onInvisible() {
-//
-//
-//    }
-
-//    /**
-//     * 延迟加载
-//     * 子类必须重写此方法
-//     */
-//    protected abstract void lazyLoad();
 
     //保存一些数据
     private static Map<String, Object> dataSave = new HashMap<>(2);
@@ -57,6 +18,7 @@ public abstract class BaseMainFragment<T extends XBasePresenter> extends BaseFra
 
     /**
      * 获取数据
+     *
      * @param key
      * @param <D>
      * @return
@@ -76,6 +38,7 @@ public abstract class BaseMainFragment<T extends XBasePresenter> extends BaseFra
 
     /**
      * 保存数据
+     *
      * @param key
      * @param obj
      */
@@ -87,7 +50,6 @@ public abstract class BaseMainFragment<T extends XBasePresenter> extends BaseFra
     protected void onInit() {
         super.onInit();
     }
-
 
 
     @Override

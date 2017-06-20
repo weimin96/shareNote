@@ -20,18 +20,17 @@ public abstract class XBaseFragment<T extends XBasePresenter> extends android.su
 
     protected T presenter;
 
-    private View rootView;
     private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        try{
+        try {
             presenter = GenericHelper.initPresenter(this);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        rootView = inflater.inflate(getLayoutId(), container, false);
+        View rootView = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, rootView);
         onInit();
         onListener();
@@ -44,7 +43,7 @@ public abstract class XBaseFragment<T extends XBasePresenter> extends android.su
     /**
      * 添加监听
      */
-    protected void onListener(){
+    protected void onListener() {
 
     }
 
@@ -53,10 +52,7 @@ public abstract class XBaseFragment<T extends XBasePresenter> extends android.su
     /**
      * 初始化控件
      */
-    protected void onInit(){}
-
-    public View getRootView() {
-        return this.rootView;
+    protected void onInit() {
     }
 
     @Override

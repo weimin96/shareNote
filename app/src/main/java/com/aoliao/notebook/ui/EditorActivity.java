@@ -1,18 +1,3 @@
-/*
- * Copyright 2016. SHENQINCI(沈钦赐)<946736079@qq.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.aoliao.notebook.ui;
 
@@ -78,8 +63,6 @@ public class EditorActivity extends BaseActivity<EditorPresenter> implements Edi
     private View mdShowView = null;
     private EditViewHolder mEditViewHolder;
     private MarkdownViewHolder mMarkdownViewHolder = null;
-    //菜单：保存按钮
-//    private MenuItem mActionSave;
     private ProgressDialog progressDialog;
     private String coverPicture = null;//第一次上传的图片为封面图
     private SweetAlertDialog dialog;
@@ -165,19 +148,19 @@ public class EditorActivity extends BaseActivity<EditorPresenter> implements Edi
         mViewPager.setCurrentItem(1, true);
 
         mMarkdownViewHolder.parse(mEditViewHolder.title.getText().toString(), mEditViewHolder.content.getText().toString());
-        final MarkdownPreviewView markdownPreviewView= (MarkdownPreviewView) mdShowView.findViewById(R.id.markdownView);
+        final MarkdownPreviewView markdownPreviewView = (MarkdownPreviewView) mdShowView.findViewById(R.id.markdownView);
         markdownPreviewView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                markdownPreviewView.parseMarkdown(mEditViewHolder.content.getText().toString(),true);
+                markdownPreviewView.parseMarkdown(mEditViewHolder.content.getText().toString(), true);
             }
-        },500);
+        }, 500);
         isEditToBack = false;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isEditToBack = true;
-                mViewPager.setCurrentItem(0,true);
+                mViewPager.setCurrentItem(0, true);
                 fab.setVisibility(View.GONE);
             }
         });
@@ -255,7 +238,7 @@ public class EditorActivity extends BaseActivity<EditorPresenter> implements Edi
 
     private void showGiveUpEditDialog() {
 
-        new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(getString(R.string.give_up_modification))
                 .setContentText(getString(R.string.not_save))
                 .showCancelButton(true)

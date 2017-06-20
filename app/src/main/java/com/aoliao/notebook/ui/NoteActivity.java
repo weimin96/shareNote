@@ -39,12 +39,10 @@ import java.util.List;
  * Created by 你的奥利奥 on 2017/2/14.
  */
 
-public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements ReadActicleContract.View {
+public class NoteActivity extends BaseActivity<ReadArticlePresenter> implements ReadActicleContract.View {
     private Activity mContext;
     private ArrayList<Post> noteList;
-    private NoteDB mNoteDB;
     private SQLiteDatabase mDatabase;
-    private Cursor cursor;
     private SwipeMenuRecyclerView mMenuRecyclerView;
     private NoteAdapter noteAdapter;
 
@@ -66,7 +64,6 @@ public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements
         mMenuRecyclerView = (SwipeMenuRecyclerView) findViewById(R.id.recycle_view);
         mContext = this;
         initToolbar(toolbar);
-        mNoteDB = new NoteDB(this);
         mDatabase = new NoteDB(this).getReadableDatabase();
     }
 
@@ -92,7 +89,7 @@ public class NoteActivity extends BaseActivity <ReadArticlePresenter> implements
 
     public void selectDB() {
         noteList = new ArrayList<>();
-        cursor = mDatabase.query(NoteDB.TABLE_NAME, null, null, null, null, null, sortOrder);
+        Cursor cursor = mDatabase.query(NoteDB.TABLE_NAME, null, null, null, null, null, sortOrder);
         while (cursor.moveToNext()) {
             String title = cursor.getString(cursor.getColumnIndex("title"));
             String content = cursor.getString(cursor.getColumnIndex("content"));

@@ -16,17 +16,17 @@ import butterknife.BindView;
  * Created by 你的奥利奥 on 2017/6/10.
  */
 
-public class ViewUserInfoActivity extends BaseActivity<EditUserInfoPresenter>{
+public class ViewUserInfoActivity extends BaseActivity<EditUserInfoPresenter> {
     @BindView(R.id.toolBar)
     Toolbar toolbar;
     @BindView(R.id.rvUserInfo)
     RecyclerView rvUserInfo;
     @BindView(R.id.bottomSheet)
     BottomSheetLayout bottomSheet;
-    private static final int REQUEST_CODE_PICK_CITY = 0;
+
     @Override
     protected int getContentId() {
-        return  R.layout.activity_edit_user_info;
+        return R.layout.activity_edit_user_info;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ViewUserInfoActivity extends BaseActivity<EditUserInfoPresenter>{
      */
     private void initList() {
         rvUserInfo.setLayoutManager(new LinearLayoutManager(this));
-        User user=BaseActivity.getData(User.class.getSimpleName());
+        User user = BaseActivity.getData(User.class.getSimpleName());
         UserInfoAdapter adapter = new UserInfoAdapter(user);
         rvUserInfo.setAdapter(adapter);
     }

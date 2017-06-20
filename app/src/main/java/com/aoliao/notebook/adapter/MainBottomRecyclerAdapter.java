@@ -13,7 +13,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.ArrayList;
 
 
-
 public class MainBottomRecyclerAdapter extends BaseQuickAdapter<Post, BaseViewHolder> {
 
     public MainBottomRecyclerAdapter(int layoutId) {
