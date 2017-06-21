@@ -6,7 +6,7 @@
   
 <p align="center">本项目借鉴于以上项目 </p>
   
-  
+<p align="center"><img src="https://github.com/weimin96/shareNote/blob/master/screenshot/header.jpg"/></p>
 
 ## Apk download
 
