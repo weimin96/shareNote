@@ -3,10 +3,8 @@
 package com.aoliao.notebook.presenter;
 
 
-import android.util.Log;
-
 import com.aoliao.notebook.contract.EditUserInfoContract;
-import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.model.NetRequest;
 import com.aoliao.notebook.utils.entity.User;
 import com.aoliao.notebook.utils.LoginCheck;
 import com.aoliao.notebook.xmvp.XBasePresenter;

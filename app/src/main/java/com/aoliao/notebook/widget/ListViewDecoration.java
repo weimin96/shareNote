@@ -1,4 +1,4 @@
-package com.aoliao.notebook.view;
+package com.aoliao.notebook.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

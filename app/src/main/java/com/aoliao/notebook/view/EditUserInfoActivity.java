@@ -1,4 +1,4 @@
-package com.aoliao.notebook.ui;
+package com.aoliao.notebook.view;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,7 +8,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.aoliao.notebook.R;

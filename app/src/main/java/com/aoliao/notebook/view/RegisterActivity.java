@@ -1,5 +1,5 @@
 
-package com.aoliao.notebook.ui;
+package com.aoliao.notebook.view;
 
 import android.content.Intent;
 import android.os.Bundle;

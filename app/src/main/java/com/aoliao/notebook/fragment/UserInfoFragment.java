@@ -12,11 +12,11 @@ import com.aoliao.notebook.contract.UserListContract;
 import com.aoliao.notebook.factory.FragmentFactory;
 import com.aoliao.notebook.utils.entity.User;
 import com.aoliao.notebook.presenter.UserInfoPresenter;
-import com.aoliao.notebook.ui.CollectActivity;
-import com.aoliao.notebook.ui.EditUserInfoActivity;
-import com.aoliao.notebook.ui.LoginActivity;
-import com.aoliao.notebook.ui.ReleaseActivity;
-import com.aoliao.notebook.ui.UserListActivity;
+import com.aoliao.notebook.view.CollectActivity;
+import com.aoliao.notebook.view.EditUserInfoActivity;
+import com.aoliao.notebook.view.LoginActivity;
+import com.aoliao.notebook.view.ReleaseActivity;
+import com.aoliao.notebook.view.UserListActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

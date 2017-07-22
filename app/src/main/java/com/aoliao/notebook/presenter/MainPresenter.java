@@ -9,7 +9,7 @@ import com.aoliao.notebook.fragment.UserInfoFragment;
 import com.aoliao.notebook.config.Config;
 import com.aoliao.notebook.utils.data.DataFiller;
 import com.aoliao.notebook.utils.entity.User;
-import com.aoliao.notebook.ui.UserInfoActivity;
+import com.aoliao.notebook.view.UserInfoActivity;
 import com.aoliao.notebook.utils.ImgLoadUtil;
 import com.aoliao.notebook.xmvp.XBasePresenter;
 

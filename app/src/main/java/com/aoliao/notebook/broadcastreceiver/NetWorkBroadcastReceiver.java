@@ -7,7 +7,7 @@ import android.net.ConnectivityManager;
 
 import com.aoliao.notebook.utils.NetworkUtils;
 
-import static com.aoliao.notebook.ui.BaseActivity.evevt;
+import static com.aoliao.notebook.view.BaseActivity.evevt;
 
 public class NetWorkBroadcastReceiver extends BroadcastReceiver {
     public NetEvevt mEvevt = evevt;

@@ -1,4 +1,4 @@
-package com.aoliao.notebook.ui;
+package com.aoliao.notebook.view;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;

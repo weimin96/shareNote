@@ -1,4 +1,4 @@
-package com.aoliao.notebook.ui;
+package com.aoliao.notebook.view;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -21,7 +21,7 @@ import com.aoliao.notebook.adapter.NoteAdapter;
 import com.aoliao.notebook.utils.db.NoteDB;
 import com.aoliao.notebook.utils.listener.OnItemClickListener;
 import com.aoliao.notebook.utils.entity.Post;
-import com.aoliao.notebook.view.ListViewDecoration;
+import com.aoliao.notebook.widget.ListViewDecoration;
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;

@@ -11,7 +11,7 @@ public class FragmentFactory {
     /**
      * 主页Fragment数量
      */
-    private static final int FRAGMENT_NUM = 11;
+    private static final int FRAGMENT_NUM = 4;
 
     /**
      * 统一管理MainActivity中所有Fragment

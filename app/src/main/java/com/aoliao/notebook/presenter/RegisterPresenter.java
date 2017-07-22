@@ -5,7 +5,7 @@ package com.aoliao.notebook.presenter;
 
 import com.aoliao.notebook.contract.RegisterContract;
 import com.aoliao.notebook.config.Config;
-import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.model.NetRequest;
 import com.aoliao.notebook.utils.entity.User;
 import com.aoliao.notebook.utils.LoginCheck;
 import com.aoliao.notebook.utils.MD5Util;

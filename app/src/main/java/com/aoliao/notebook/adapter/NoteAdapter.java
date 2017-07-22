@@ -39,22 +39,21 @@ public class NoteAdapter extends SwipeMenuAdapter<NoteAdapter.DefaultViewHolder>
     }
 
 
-
     @Override
     public View onCreateContentView(ViewGroup parent, int viewType) {
-        return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notes,parent,false);
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notes, parent, false);
     }
 
     @Override
     public DefaultViewHolder onCompatCreateViewHolder(View realContentView, int viewType) {
-        DefaultViewHolder viewHolder=new DefaultViewHolder(realContentView);
-        viewHolder.mOnItemClickListener=mOnItemClickListener;
+        DefaultViewHolder viewHolder = new DefaultViewHolder(realContentView);
+        viewHolder.mOnItemClickListener = mOnItemClickListener;
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(DefaultViewHolder holder, int position) {
-        Post post=list.get(position);
+        Post post = list.get(position);
         if (!"".equals(post.getTitle().trim())) {
             holder.title.setText(post.getTitle());
         } else {
@@ -81,7 +80,7 @@ public class NoteAdapter extends SwipeMenuAdapter<NoteAdapter.DefaultViewHolder>
         @Override
         public void onClick(View v) {
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(getAdapterPosition(),v);
+                mOnItemClickListener.onItemClick(getAdapterPosition(), v);
             }
         }
     }

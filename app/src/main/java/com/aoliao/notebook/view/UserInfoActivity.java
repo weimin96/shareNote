@@ -1,4 +1,4 @@
-package com.aoliao.notebook.ui;
+package com.aoliao.notebook.view;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;

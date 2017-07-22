@@ -1,11 +1,10 @@
-package com.aoliao.notebook.ui;
+package com.aoliao.notebook.view;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,7 +23,6 @@ import com.aoliao.notebook.utils.CodeUtils;
 import org.json.JSONObject;
 
 import butterknife.BindView;
-import butterknife.OnTextChanged;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 

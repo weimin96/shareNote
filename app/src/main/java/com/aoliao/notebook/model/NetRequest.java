@@ -1,11 +1,14 @@
 
 
-package com.aoliao.notebook.utils;
+package com.aoliao.notebook.model;
 
 
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.factory.ErrMsgFactory;
 import com.aoliao.notebook.AppController;
+import com.aoliao.notebook.utils.Compressor;
+import com.aoliao.notebook.utils.MD5Util;
+import com.aoliao.notebook.utils.NetCheck;
 import com.aoliao.notebook.utils.entity.BannerData;
 import com.aoliao.notebook.utils.entity.Comment;
 import com.aoliao.notebook.utils.entity.Post;

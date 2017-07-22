@@ -7,12 +7,12 @@ import com.aoliao.notebook.contract.ReadActicleContract;
 import com.aoliao.notebook.fragment.BaseMainFragment;
 import com.aoliao.notebook.AppController;
 import com.aoliao.notebook.config.Config;
-import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.model.NetRequest;
 import com.aoliao.notebook.utils.entity.Comment;
 import com.aoliao.notebook.utils.entity.Post;
 import com.aoliao.notebook.utils.entity.Reply;
 import com.aoliao.notebook.utils.entity.User;
-import com.aoliao.notebook.ui.BaseActivity;
+import com.aoliao.notebook.view.BaseActivity;
 import com.aoliao.notebook.xmvp.XBasePresenter;
 
 import java.util.List;

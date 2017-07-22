@@ -4,7 +4,7 @@ package com.aoliao.notebook.presenter;
 import com.aoliao.notebook.R;
 import com.aoliao.notebook.contract.EditorContract;
 import com.aoliao.notebook.AppController;
-import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.model.NetRequest;
 import com.aoliao.notebook.xmvp.XBasePresenter;
 
 import java.io.File;

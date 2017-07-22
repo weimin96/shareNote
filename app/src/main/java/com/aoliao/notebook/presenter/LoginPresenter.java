@@ -3,7 +3,7 @@ package com.aoliao.notebook.presenter;
 
 
 import com.aoliao.notebook.contract.LoginContract;
-import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.model.NetRequest;
 import com.aoliao.notebook.utils.entity.User;
 import com.aoliao.notebook.utils.LoginCheck;
 import com.aoliao.notebook.xmvp.XBasePresenter;
@@ -14,10 +14,12 @@ import com.aoliao.notebook.xmvp.XBasePresenter;
 
 public class LoginPresenter extends XBasePresenter<LoginContract.View> implements LoginContract.Presenter {
 
+    //获取view接口角色
     public LoginPresenter(LoginContract.View view) {
         super(view);
     }
 
+    //实现业务逻辑
     @Override
     public void requestLogin(final String name, final String password) {
         String nameErr = LoginCheck.checkAccount(name);

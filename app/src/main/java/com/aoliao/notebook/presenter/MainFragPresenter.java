@@ -3,16 +3,14 @@ package com.aoliao.notebook.presenter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.aoliao.notebook.config.Config;
 import com.aoliao.notebook.contract.MainContract;
 import com.aoliao.notebook.fragment.MainFragment;
-import com.aoliao.notebook.ui.BaseActivity;
-import com.aoliao.notebook.ui.ReadArticleActivity;
-import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.view.BaseActivity;
+import com.aoliao.notebook.view.ReadArticleActivity;
+import com.aoliao.notebook.model.NetRequest;
 import com.aoliao.notebook.utils.entity.BannerData;
 import com.aoliao.notebook.utils.entity.MainTag;
 import com.aoliao.notebook.utils.entity.Post;

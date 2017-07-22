@@ -3,11 +3,11 @@ package com.aoliao.notebook.presenter;
 
 import com.aoliao.notebook.contract.ReleaseContract;
 import com.aoliao.notebook.fragment.BaseMainFragment;
-import com.aoliao.notebook.utils.NetRequest;
+import com.aoliao.notebook.model.NetRequest;
 import com.aoliao.notebook.utils.entity.Post;
 import com.aoliao.notebook.utils.entity.User;
-import com.aoliao.notebook.ui.BaseActivity;
-import com.aoliao.notebook.ui.BaseRefreshActivity;
+import com.aoliao.notebook.view.BaseActivity;
+import com.aoliao.notebook.view.BaseRefreshActivity;
 import com.aoliao.notebook.xmvp.XBasePresenter;
 
 import java.util.List;

@@ -34,47 +34,47 @@
                    android:value="97fb1da5cd4a493e7e2d52581a706962"/>
 
         <activity
-            android:name=".ui.EditorActivity"
+            android:name=".view.EditorActivity"
             android:launchMode="singleTask"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".view.LoginActivity"
             android:launchMode="singleTask"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.NoteActivity"
+            android:name=".view.NoteActivity"
             android:launchMode="singleTask"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.RecycleActivity"
+            android:name=".view.RecycleActivity"
             android:launchMode="singleTask"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name=".view.RegisterActivity"
             android:launchMode="singleTask"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".ui.MobSMSCodeActivity"
+            android:name=".view.MobSMSCodeActivity"
             android:launchMode="singleTask"
             android:theme="@style/MainTheme" />
-        <activity android:name=".ui.CollectActivity"
+        <activity android:name=".view.CollectActivity"
                   android:theme="@style/MainTheme"/>
-        <activity android:name=".ui.ReleaseActivity"
+        <activity android:name=".view.ReleaseActivity"
                   android:theme="@style/MainTheme"/>
-        <activity android:name=".ui.UserInfoActivity"
+        <activity android:name=".view.UserInfoActivity"
                   android:theme="@style/MainTheme"/>
-        <activity android:name=".ui.SettingsActivity" />
-        <activity android:name=".ui.ReadArticleActivity"
+        <activity android:name=".view.SettingsActivity" />
+        <activity android:name=".view.ReadArticleActivity"
                   android:theme="@style/MainTheme"/>
-        <activity android:name=".ui.ViewUserInfoActivity"
+        <activity android:name=".view.ViewUserInfoActivity"
                   android:theme="@style/MainTheme"/>
-        <activity android:name=".ui.UserListActivity"
+        <activity android:name=".view.UserListActivity"
                   android:theme="@style/MainTheme"/>
-        <activity android:name=".ui.EditUserInfoActivity"
+        <activity android:name=".view.EditUserInfoActivity"
                   android:theme="@style/MainTheme"/>
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".view.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">

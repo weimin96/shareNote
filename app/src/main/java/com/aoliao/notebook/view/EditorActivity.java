@@ -1,5 +1,5 @@
 
-package com.aoliao.notebook.ui;
+package com.aoliao.notebook.view;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -341,7 +341,7 @@ public class EditorActivity extends BaseActivity<EditorPresenter> implements Edi
 
     @Override
     protected int getContentId() {
-        return R.layout.fragment_editor_parent;
+        return R.layout.activity_editor;
     }
 
     private void initTab() {
